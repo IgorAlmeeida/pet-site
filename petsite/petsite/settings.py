@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'bolsa',
     'adminpet',
     'website',
+    'bootstrapform',
 ]
 
 MIDDLEWARE = [

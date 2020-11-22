@@ -1,0 +1,160 @@
+{% load static %}
+
+{% load static %}
+
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <div class="sidebar-brand-icon rotate-n-15">
+            <i class="fas fa-laugh-wink"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">Criativação<sup>2</sup></div>
+    </a>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item active">
+        <a class="nav-link" href="index.html">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Dashboard</span></a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Notícias
+    </div>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+            aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Feed</span>
+        </a>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="buttons.html">Publicações</a>
+                <a class="collapse-item" href="cards.html">Minhas Publicações</a>
+            </div>
+        </div>
+    </li>
+
+    <div class="sidebar-heading">
+        Blog
+    </div>
+
+        <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBlog"
+            aria-expanded="true" aria-controls="collapseBlog">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Blog</span>
+        </a>
+        <div id="collapseBlog" class="collapse" aria-labelledby="headingBlog" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="cards.html">Novo Post</a>
+                <a class="collapse-item" href="buttons.html">Posts</a>
+                
+            </div>
+        </div>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Menu Principal
+    </div>
+
+    <!-- Nav Item - Utilities Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProjeto"
+            aria-expanded="true" aria-controls="collapseProjeto">
+            <i class="fas fa-fw fa-wrench"></i>
+            <span>Projetos</span>
+        </a>
+        <div id="collapseProjeto" class="collapse" aria-labelledby="headingProjeto"
+            data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="{% url 'list_project' %}">Projetos</a>
+                <a class="collapse-item" href="{% url 'list_my_project'%}">Meus Projetos</a>
+            </div>
+        </div>
+    </li>    
+    
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAtividade"
+            aria-expanded="true" aria-controls="collapseProjetos">
+            <i class="fas fa-fw fa-wrench"></i>
+            <span>Atividade</span>
+        </a>
+        <div id="collapseAtividade" class="collapse" aria-labelledby="headingAtividade"
+            data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="utilities-color.html">Atividade</a>
+                <a class="collapse-item" href="utilities-border.html">Minhas Atividade</a>
+            </div>
+        </div>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReuniao"
+            aria-expanded="true" aria-controls="collapseReuniao">
+            <i class="fas fa-fw fa-wrench"></i>
+            <span>Reunião</span>
+        </a>
+        <div id="collapseReuniao" class="collapse" aria-labelledby="headingReuniao"
+            data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="utilities-color.html">Reuniões</a>
+                <a class="collapse-item" href="utilities-border.html">Atas</a>
+            </div>
+        </div>
+    </li>
+
+        <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Minha Conta
+    </div>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProfile"
+            aria-expanded="true" aria-controls="collapseProfile">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Profile</span>
+        </a>
+        <div id="collapseProfile" class="collapse" aria-labelledby="headingProfile" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="login.html">Perfil</a>
+                <a class="collapse-item" href="login.html">Alterar Senha</a>
+                <a class="collapse-item" href="login.html"></a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+
+    <!-- Sidebar Message 
+    <div class="sidebar-card">
+        <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="">
+        <p class="text-center mb-2"><strong>Criativação</strong>
+    </div>-->
+
+</ul>

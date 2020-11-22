@@ -24,11 +24,13 @@
                             aria-labelledby="dropdownMenuLink">
                             <div class="dropdown-header">Opções</div>
                             <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Detalhes</a>
-                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Atualizar</a>
-                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Deletar</a>
+                                <a class="dropdown-item" href="{% url 'update_project' id=project.id %}">Atualizar</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{% url 'list_cronogram' idProject=project.id %}">Cronograma</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{% url 'detail_project' id=project.id %}">Detalhes</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{% url 'delete_project' id=project.id %}">Deletar</a>
                         </div>
                     </div>
                 </div>

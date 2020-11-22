@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap %}
+
+
+{% block main %}
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Novo Cronograma</h1>
+    </div>
+    <form action="{% url 'new_cronogram' idProject=project.id%}" method="POST">
+        {% csrf_token %}
+        
+        {{form_cronogram | bootstrap}}
+
+        <button class="btn btn-primary"type="submit">Cadastrar</button>
+    </form>
+{% endblock main %}
+

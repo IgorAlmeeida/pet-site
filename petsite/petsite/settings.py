@@ -128,3 +128,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIR = [
     os.path.join(BASE_DIR, "static"),
 ]
+
+DATE_INPUT_FORMT = ['YYYY-MM-DD']

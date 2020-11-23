@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap %}
+
+
+{% block main %}
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Deletar Atividade - {{activity.title}}</h1>
+    </div>
+    <form action="{% url 'delete_activity' id=activity.id%}" method="POST">
+        {% csrf_token %}
+        <p>Deseja deletar a atividade: {{activity.title}}<p>
+
+        <button class="btn btn-danger"type="submit">Excluir</button>
+    </form>
+    
+{% endblock main %}

@@ -8,6 +8,13 @@ from .models import Project, Cronogram, Activity
 def home (request):
     return render(request,'adminpet/index.html')
 
+def login(request):
+    return render(request,'adminpet/login.html')
+def forgotPassword(request):
+    return render(request,'adminpet/forgot-password.html')
+def register(request):
+    return render(request,'adminpet/register.html')    
+
 
 #------------------------------------VIEWS PROJECT-----------------------------------------#
 def listProjects(request):

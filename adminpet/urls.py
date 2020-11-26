@@ -13,10 +13,16 @@ from .views import ( home,
                     newActivityProject,
                     updateActivityProject,
                     deleteActivityProject,
-                    listActivityProject)
+                    listActivityProject,
+                    login,
+                    forgotPassword,
+                    register)
                     
 urlpatterns = [
     path('', home, name='page_home'),
+    path('login/', login, name='login'),
+    path('forgot_password/', forgotPassword, name='forgot_password'),
+    path('register/', register, name='register'),
     
     path('projeto/',listProjects, name='list_project'),
     path('projeto/my', listMyProjects, name='list_my_project'),

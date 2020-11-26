@@ -49,8 +49,9 @@ class Cronogram(models.Model):
         return str(self.title)
 
 class Activity(models.Model):
-    description = models.CharField(max_length=300, blank=True, null=True)
-    realizationDate = models.DateTimeField(blank=False, null=False, auto_now=True)
+    title = models.CharField(max_length=200, blank=False, null=False)
+    description = models.TextField(blank=True, null=False)
+    realizationDate = models.DateTimeField(blank=False, null=False)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     realizators = models.ManyToManyField(Profile)
 

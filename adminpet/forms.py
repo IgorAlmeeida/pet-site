@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 from django import forms
-from .models import Project, Cronogram
+from .models import Project, Cronogram, Activity
 
 
 class ProjectForm(ModelForm):
@@ -31,7 +31,26 @@ class CronogramForm(ModelForm):
         fields = '__all__'
         labels = {
             'title' : ('Título:'),
-            'initDate' : ('Início:'),
             'endDate' : ('Fim:'),
+            'initDate' : ('Inicio:'),
             'project' : ('Projeto:'),
+        }
+        widgets = {
+            'initDate': forms.DateInput(format=('%Y-%m-%d'), attrs={'class':'form-control','type': 'date'}),
+            'endDate': forms.DateInput(format=('%Y-%m-%d'), attrs={'class':'form-control','type': 'date'})
+        }
+
+class ActivityForm(ModelForm):
+    class Meta:
+        model = Activity
+        fields = '__all__'
+        labels = {
+            'title': ('Titulo'),
+            'description' : ('Descrição:'),
+            'realizationDate' : ('Data:'),
+            'project' : ('Projeto:'),
+            'realizators' : ('Realizado por:'),
+        }
+        widgets = {
+            'realizationDate': forms.DateInput(format=('%Y-%m-%d'), attrs={'class':'form-control','type': 'date'}),
         }

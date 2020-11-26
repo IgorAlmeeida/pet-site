@@ -5,12 +5,12 @@
 
 {% block main %}
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Atualizar Projeto - {{project.title}}</h1>
+        <h1 class="h3 mb-0 text-gray-800">Atualizar Atividade - {{activity.title}}</h1>
     </div>
-    <form action="{% url 'update_project' project.id%}" method="POST">
+    <form action="{% url 'update_activity' idProject=project.id idActivity=activity.id %}" method="POST">
         {% csrf_token %}
         
-        {{form_project | bootstrap}}
+        {{form_activity | bootstrap}}
 
         <button class="btn btn-primary"type="submit">Salvar</button>
     </form>

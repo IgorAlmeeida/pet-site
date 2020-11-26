@@ -7,11 +7,20 @@
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Deletar Atividade - {{activity.title}}</h1>
     </div>
-    <form action="{% url 'delete_activity' id=activity.id%}" method="POST">
-        {% csrf_token %}
-        <p>Deseja deletar a atividade: {{activity.title}}<p>
 
-        <button class="btn btn-danger"type="submit">Excluir</button>
-    </form>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary"></h6>
+        </div>
+        <div class="card-body">
+            <form action="{% url 'delete_activity' idProject=project.id idActivity=activity.id%}" method="POST">
+                {% csrf_token %}
+                <p>Deseja deletar a atividade: {{activity.title}}<p>
+
+                <button class="btn btn-danger"type="submit">Excluir</button>
+            </form>
+        </div>
+    </div>
+
     
 {% endblock main %}

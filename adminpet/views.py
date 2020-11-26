@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .forms import ProjectForm, CronogramForm
-from .models import Project, Cronogram
+from .forms import ProjectForm, CronogramForm, ActivityForm
+from .models import Project, Cronogram, Activity
 
 # Create your views here.
 
@@ -141,3 +141,72 @@ def listCronogramProject(request, idProject):
     data['project'] = project
     data['cronograms'] = cronograms
     return render(request, 'adminpet/cronogram/list_cronogram.html', data)
+
+
+#----------------------------------------VIEWS ACTIVITY---------------------------------------#
+
+def newActivityProject(request, idProject):
+    formActivity = ActivityForm(request.POST or None)
+
+    if(request.method == 'POST'):
+        
+        if(formActivity.is_valid()):
+            formActivity.save()
+            return redirect('list_activity', idProject=idProject)
+
+    else:
+        #Customing Forms
+        project = Project.objects.get(id=idProject)
+        formActivity = ActivityForm()
+        formActivity.fields["project"].initial = project.id
+        
+        data = {'form_activity': formActivity, 'project':project}
+
+        return render(request, 'adminpet/activity/new_activity.html', data)
+
+def updateActivityProject(request, idProject, idActivity):
+    data ={}
+    project = Project.objects.get(id=idProject)
+    activity = Activity.objects.get(id=idActivity)
+
+    formActivity = ActivityForm(request.POST or None, instance=activity)
+
+    data['project'] = project
+    data['activity'] = activity
+    data['form_activity'] = formActivity 
+
+    if (request.method == 'POST'):
+        if (formActivity.is_valid()):
+            formActivity.save()
+            return redirect('list_activity', idProject=idProject)
+    else:
+        return render(request, 'adminpet/activity/update_activity.html', data)
+
+
+def deleteActivityProject(request, idProject, idActivity):
+    activity = Activity.objects.get(id=idActivity)
+    project = Project.objects.get(id=idProject)
+
+    if (request.method == 'POST'):
+        if (project != None):
+            activity.delete()
+            return redirect ('list_activity', idProject=project.id)
+        else:
+            data = {}
+            mensagem = ("Atividade não encontrado.")
+            data['mensagem'] = mensagem
+            return render(request, 'adminpet/activity/list_activity.html', data)
+
+    else:
+        data = {}
+        data['project'] = project
+        data['activity'] = activity
+        return render(request, 'adminpet/activity/delete_activity.html', data)
+
+def listActivityProject(request, idProject):
+    project = Project.objects.get(id=idProject)
+    activitys = Activity.objects.filter(project_id=idProject)
+    data = {}
+    data['project'] = project
+    data['activitys'] = activitys
+    return render(request, 'adminpet/activity/list_activity.html', data)

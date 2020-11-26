@@ -9,7 +9,12 @@ from .views import ( home,
                     newCronogramProject,
                     updateCronogramProject,
                     deleteCronogramProject,
-                    listCronogramProject)
+                    listCronogramProject,
+                    newActivityProject,
+                    updateActivityProject,
+                    deleteActivityProject,
+                    listActivityProject)
+                    
 urlpatterns = [
     path('', home, name='page_home'),
     
@@ -20,9 +25,15 @@ urlpatterns = [
     path('projeto/delete/<int:id>/',deleteProject, name='delete_project'),
     path('projeto/detail/<int:id>/',detailProject, name='detail_project'),
 
-    path('projeto/detail/<int:idProject>/cronogram/new',newCronogramProject, name='new_cronogram'),
-    path('projeto/detail/<int:idProject>/cronogram/update/<idCronogram>/',updateCronogramProject, name='update_cronogram'),
-    path('projeto/detail/<int:idProject>/cronogram/delete/<idCronogram>/',deleteCronogramProject, name='delete_cronogram'),
-    path('projeto/detail/<int:idProject>/cronogram/list/',listCronogramProject, name='list_cronogram'),
+    path('projeto/detail/<int:idProject>/cronograma/new',newCronogramProject, name='new_cronogram'),
+    path('projeto/detail/<int:idProject>/cronograma/update/<idCronogram>/',updateCronogramProject, name='update_cronogram'),
+    path('projeto/detail/<int:idProject>/cronograma/delete/<idCronogram>/',deleteCronogramProject, name='delete_cronogram'),
+    path('projeto/detail/<int:idProject>/cronograma/list/',listCronogramProject, name='list_cronogram'),
+
+    path('projeto/detail/<int:idProject>/atividade/new',newActivityProject, name='new_activity'),
+    path('projeto/detail/<int:idProject>/atividade/update/<idActivity>/',updateActivityProject, name='update_activity'),
+    path('projeto/detail/<int:idProject>/atividade/delete/<idActivity>/',deleteActivityProject, name='delete_activity'),
+    path('projeto/detail/<int:idProject>/atividade/list/',listActivityProject, name='list_activity'),
+
 
 ]

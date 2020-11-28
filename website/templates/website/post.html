@@ -1,1 +1,14 @@
 {% extends "base_website.html" %}
+
+{% block title_pag %}
+    <ol>
+        <li><a href="{% url 'page_home_website' %}">Home</a></li>
+        <li><a href="{% url 'blog' %}">Blog</a></li>
+        <li>Title Post</li>
+    </ol>
+
+{% endblock title_pag %}
+
+{% block main %}
+    
+{% endblock main %}

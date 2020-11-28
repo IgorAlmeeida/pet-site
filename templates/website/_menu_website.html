@@ -1,0 +1,37 @@
+<!-- ======= Top Bar ======= -->
+<div id="topbar" class="d-none d-lg-flex align-items-end fixed-top topbar-transparent">
+<div class="container d-flex justify-content-end">
+    <div class="social-links">
+    <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+    <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+    <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
+    <a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
+    </div>
+</div>
+</div>
+
+<!-- ======= Header ======= -->
+<header id="header" class="fixed-top header-transparent">
+    <div class="container d-flex align-items-center">
+
+        <h1 class="logo mr-auto"><a href="index.html">PET - Criativação</a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+        <nav class="main-nav d-none d-lg-block">
+        <ul>
+            <li class="active"><a href="{% url 'page_home_website' %}">Home</a></li>
+            <li><a href="{% url 'blog' %}">Blog</a></li>
+            <li><a href="{% url 'membros' %}">Membros</a></li>
+            <li><a href="{% url 'selecoes' %}">Seleções</a></li>
+            <li class="drop-down"><a href="">Projetos</a>
+            <ul>
+                <li><a href="#">Drop Down 1</a></li>
+            </ul>
+            </li>
+            <li><a href="{% url 'contato' %}">Contato</a></li>
+        </ul>
+        </nav><!-- .main-nav-->
+
+    </div>
+</header><!-- End Header -->

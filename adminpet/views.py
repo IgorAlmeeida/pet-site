@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .forms import ProjectForm, CronogramForm, ActivityForm
+from .forms import ProjectForm, CronogramForm, ActivityForm, CategoryForm, PostForm
 from .models import Project, Cronogram, Activity
+from website.models import Category, Post
 
 # Create your views here.
 
@@ -217,3 +218,124 @@ def listActivityProject(request, idProject):
     data['project'] = project
     data['activitys'] = activitys
     return render(request, 'adminpet/activity/list_activity.html', data)
+
+
+# --------------------------------Blog----------------------------------------------------
+
+def newCategory(request):
+    form = CategoryForm(request.POST or None)
+
+    if(request.method == 'POST'):
+        if(form.is_valid()):
+            form.save()
+            return redirect('list_post')
+    else:
+        formCategory = CategoryForm()
+        data = {'form_category': formCategory}
+        return render(request, 'adminpet/post/new_category', data)
+
+def updateCategory(request, idCategory):
+    data ={}
+    category = Category.objects.get(id=idCategory)
+    formCategory = CategoryForm(request.POST or None, instance=category)
+
+    data['category'] = category
+    data['form_category'] = formCategory 
+
+    if (request.method == 'POST'):
+        if (formCategory.is_valid()):
+            formCategory.save()
+            return redirect('list_post')
+    else:
+        return render(request, 'adminpet/post/update_category.html', data)
+
+def listCategory(request):
+    categorys = Category.objects.all()
+    data = {'categorys': categorys}
+    return render(request, 'adminpet/post/list_category.html', data)
+
+def detailCategory(request, idCategory):
+    data = {}
+    category = Category.objects.get(id=idCategory or None)
+    if (category == None):
+        mensagem = ("Não foi possível encontrar o projeto no banco de dados")
+        data['mensagem'] = mensagem
+        return render(request, 'adminpet/post/show_post.html', data)
+    else:
+        data['category'] = category
+        return render(request, 'adminpet/post/show_post.html', data)
+
+def deleteCategory(request, idCategory):
+    category = Category.objects.get(id=idCategory) or None
+    if (request.method == 'POST'):
+        if (category != None):
+            category.delete()
+            return redirect ('list_project')
+        else:
+            data = {}
+            mensagem = ("Projeto não encontrado.")
+            data['mensagem'] = mensagem
+            return render(request, 'adminpet/post/delete_post.html', data)
+
+    else:
+        data = {}
+        data['cateogory'] = category
+        return render(request, 'adminpet/post/delete_post.html', data)
+
+
+def newPost(request):
+    form = PostForm(request.POST or None)
+
+    if(request.method == 'POST'):
+        if(form.is_valid()):
+            form.save()
+            return redirect('list_post')
+    else:
+        formPost = PostForm()
+        data = {'form_post': formPost}
+        return render(request, 'adminpet/post/new_post', data)
+    
+
+def updatePost(request, idPost):
+    data ={}
+    post = Post.objects.get(id=idPost)
+    formPost = PostForm(request.POST or None, instance=post)
+
+    data['post'] = post
+    data['form_post'] = formPost 
+
+    if (request.method == 'POST'):
+        if (formPost.is_valid()):
+            formPost.save()
+            return redirect('list_post')
+    else:
+        return render(request, 'adminpet/post/update_post.html', data)
+
+def listPost(request):
+    posts = Post.objects.all()
+    data = {'posts': posts}
+    return render(request, 'adminpet/post/list_post.html', data)
+    
+def detailPost(request, idPost):
+    data = {}
+    post = Post.objects.get(id=idPost or None)
+    if (post == None):
+        mensagem = ("Não foi possível encontrar o projeto no banco de dados")
+        data['mensagem'] = mensagem
+        return render(request, 'adminpet/post/show_post.html', data)
+    else:
+        data['post'] = post
+        return render(request, 'adminpet/post/show_post.html', data)
+
+def deletePost(request, idPost):
+    data = {}
+    post = Post.objects.get(id=idPost or None)
+    if (post == None):
+        mensagem = ("Não foi possível encontrar o projeto no banco de dados")
+        data['mensagem'] = mensagem
+        return render(request, 'adminpet/post/show_post.html', data)
+    else:
+        data['post'] = post
+        return render(request, 'adminpet/post/show_post.html', data)
+
+

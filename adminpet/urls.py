@@ -16,7 +16,17 @@ from .views import ( home,
                     listActivityProject,
                     login,
                     forgotPassword,
-                    register)
+                    register, 
+                    deleteCategory,
+                    newCategory,
+                    updateCategory,
+                    detailCategory,
+                    listCategory,
+                    deletePost,
+                    newPost,
+                    detailPost,
+                    listPost,
+                    updatePost)
                     
 urlpatterns = [
     path('', home, name='page_home'),
@@ -40,6 +50,21 @@ urlpatterns = [
     path('projeto/detail/<int:idProject>/atividade/update/<idActivity>/',updateActivityProject, name='update_activity'),
     path('projeto/detail/<int:idProject>/atividade/delete/<idActivity>/',deleteActivityProject, name='delete_activity'),
     path('projeto/detail/<int:idProject>/atividade/list/',listActivityProject, name='list_activity'),
+
+    path('blog/post/detail/<int:idPost>',detailPost, name='detail_post'),
+    path('blog/post/new',newPost, name='new_post'),
+    path('blog/post/update/<int:idPost>',updatePost, name='update_post'),
+    path('blog/post/delete/<int:idPost>',deletePost, name='delete_post'),
+    path('blog/post/list',listPost, name='list_post'),
+
+    path('blog/categoria/detail/<int:idCategory>',detailCategory, name='detail_category'),
+    path('blog/categoria/new',updateCategory, name='new__category'),
+    path('blog/categoria/update/<int:idCategory>',updateCategory, name='update_category'),
+    path('blog/categoria/delete/<int:idCategory>',deleteCategory, name='delete_category'),
+    path('blog/categoria/list',listCategory, name='list_category'),
+
+
+
 
 
 ]

@@ -1,6 +1,7 @@
 from django.forms import ModelForm
 from django import forms
 from .models import Project, Cronogram, Activity
+from website.models import Category, Post
 
 
 class ProjectForm(ModelForm):
@@ -56,3 +57,31 @@ class ActivityForm(ModelForm):
             'realizationDate': forms.DateInput(format=('%Y-%m-%d'), attrs={'class':'form-control','type': 'date'}),
             'project' : forms.HiddenInput(),
         }
+
+class PostForm(ModelForm):
+    class Meta:
+        model = Post
+        fields = '__all__'
+        labels = {
+            'title' : ('Título'),
+            'dateCreate' : ('Data de Criação'),
+            'dateUpdated' : ('Ultima Atualização'),
+            'body' : ('Texto'),
+            'category' : ('Categoria'),
+            'creator' : ('Criador'),
+        }
+        widgets = {
+            'creator': forms.HiddenInput(),
+        }
+
+
+class CategoryForm(ModelForm):
+    class Meta:
+        model = Category
+        fields = '__all__'
+        labels = {
+            'name': ('Descrição'),
+            'course': ('Curso')
+        }
+        widgets = {}
+

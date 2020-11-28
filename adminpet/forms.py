@@ -37,7 +37,8 @@ class CronogramForm(ModelForm):
         }
         widgets = {
             'initDate': forms.DateInput(format=('%Y-%m-%d'), attrs={'class':'form-control','type': 'date'}),
-            'endDate': forms.DateInput(format=('%Y-%m-%d'), attrs={'class':'form-control','type': 'date'})
+            'endDate' : forms.DateInput(format=('%Y-%m-%d'), attrs={'class':'form-control','type': 'date'}),
+            'project' : forms.HiddenInput(),
         }
 
 class ActivityForm(ModelForm):
@@ -53,4 +54,5 @@ class ActivityForm(ModelForm):
         }
         widgets = {
             'realizationDate': forms.DateInput(format=('%Y-%m-%d'), attrs={'class':'form-control','type': 'date'}),
+            'project' : forms.HiddenInput(),
         }

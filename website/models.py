@@ -7,9 +7,15 @@ from adminpet.models import Profile
 class Course(models.Model):
     name = models.CharField(max_length=100, blank=False, null=False)
 
+    def __str__(sefl):
+        return str(sefl.name)
+
 class Category(models.Model):
     name = models.CharField(max_length=100, blank=False, null=False)
     course = models.ForeignKey(Course, on_delete=models.DO_NOTHING)
+
+    def __str__(self):
+        return str(self.name)
 
 class Post(models.Model):
     title = models.CharField(max_length=300, blank=False, null=False)
@@ -19,5 +25,6 @@ class Post(models.Model):
     category = models.ForeignKey(Category,on_delete=models.CASCADE)
     creator = models.ForeignKey(Profile, on_delete=models.DO_NOTHING) 
 
+    def __str__(self):
+        return str(self.title)
 
-    

@@ -12,7 +12,7 @@ class Course(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=100, blank=False, null=False)
-    course = models.ForeignKey(Course, on_delete=models.DO_NOTHING)
+    course = models.ManyToManyField(Course)
 
     def __str__(self):
         return str(self.name)
@@ -23,7 +23,7 @@ class Post(models.Model):
     dateUpdated = models.DateTimeField(auto_now= True)
     body = models.TextField(blank=False, null=False)
     category = models.ForeignKey(Category,on_delete=models.CASCADE)
-    creator = models.ForeignKey(Profile, on_delete=models.DO_NOTHING) 
+    creator = models.ForeignKey(Profile, on_delete=models.CASCADE) 
 
     def __str__(self):
         return str(self.title)

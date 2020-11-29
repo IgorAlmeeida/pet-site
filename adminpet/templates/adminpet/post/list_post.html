@@ -1,5 +1,51 @@
 {% extends "base.html" %}
 
 {% block main %}
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Lista de Post</h1>
+        <a class="btn btn-primary" href="{%url 'new_post'%}">Novo Post</a>
+    </div>
+
+    <div class="col-12">
+        <!-- Dropdown Card Example -->
+        {% for post in posts%}
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">{{post.title}}</h6>
+                    <div class="dropdown no-arrow">
+                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                            aria-labelledby="dropdownMenuLink">
+                            <div class="dropdown-header">Opções</div>
+                            <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{% url 'update_post' idPost=post.id %}">Atualizar</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{% url 'detail_post' idPost=post.id %}">Detalhes</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{% url 'delete_post' idPost=post.id %}">Deletar</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div>
+                        <p maxlength=300>{{post.text}}</p>
+                    </div>
+                    <div class="mt-4 float-right">
+                        <a class="btn btn-primary" href="{% url 'detail_post' idPost=post.id %}">Detalhes</a>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                        <p>Criador por:<p>
+                        {{post.creator}}
+                </div>
+            </div>
+        {%endfor%}
+    </div>
 
 {% endblock main %}

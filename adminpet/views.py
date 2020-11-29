@@ -285,7 +285,7 @@ def deleteCategory(request, idCategory):
 
 def newPost(request):
     form = PostForm(request.POST or None)
-
+    
     if(request.method == 'POST'):
         if(form.is_valid()):
             form.save()

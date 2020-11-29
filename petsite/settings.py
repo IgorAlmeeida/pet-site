@@ -60,7 +60,7 @@ ROOT_URLCONF = 'petsite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates', 'templates/admin', 'templates/website', 'templates/bolsa'],
+        'DIRS': ['templates', 'templates/adminpet', 'templates/website', 'templates/bolsa'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

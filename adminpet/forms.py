@@ -73,6 +73,7 @@ class PostForm(ModelForm):
         widgets = {
             'creator': forms.HiddenInput(),
         }
+        
 
 
 class CategoryForm(ModelForm):

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load bootstrap %}
+
+{% block main %}
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Novo Post</h1>
+    </div>
+    <form action="{% url 'update_post' idPost=post.id %}" method="POST">
+        {% csrf_token %}
+        
+        {{form_post | bootstrap}}
+
+        <button class="btn btn-primary"type="submit">Salvar</button>
+    </form>
+    
+{% endblock main %}

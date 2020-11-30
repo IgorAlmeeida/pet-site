@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .forms import ProjectForm, CronogramForm, ActivityForm, CategoryForm, PostForm
-from .models import Project, Cronogram, Activity
+from .models import Project, Cronogram, Activity, Profile
 from website.models import Category, Post
 
 # Create your views here.
@@ -292,8 +292,10 @@ def newPost(request):
             return redirect('list_post')
     else:
         formPost = PostForm()
+        profile = Profile.objects.get(user_id=request.user.id)
+        formPost.fields["creator"].initial = profile.id
         data = {'form_post': formPost}
-        return render(request, 'adminpet/post/new_post', data)
+        return render(request, 'adminpet/post/new_post.html', data)
     
 
 def updatePost(request, idPost):

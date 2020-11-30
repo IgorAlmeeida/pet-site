@@ -8,7 +8,7 @@
 
     <div class="col-12">
         <!-- Dropdown Card Example -->
-        {% for post in posts%}
+        {% for post in posts %}
             <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -33,7 +33,7 @@
                 <!-- Card Body -->
                 <div class="card-body">
                     <div>
-                        <p maxlength=300>{{post.text}}</p>
+                        <p maxlength=300>{{post.body}}</p>
                     </div>
                     <div class="mt-4 float-right">
                         <a class="btn btn-primary" href="{% url 'detail_post' idPost=post.id %}">Detalhes</a>

@@ -4,11 +4,24 @@
     <ol>
         <li><a href="{% url 'page_home_website' %}">Home</a></li>
         <li><a href="{% url 'blog' %}">Blog</a></li>
-        <li>Title Post</li>
+        <li>{{post.title}}</li>
     </ol>
 
 {% endblock title_pag %}
 
 {% block main %}
+<section id="features" class="features">
+    <div class="container">
+      <div class="row">
+        <h4 class="ml-3 title">{{post.title}}</h4>
+      </div>
+      <div class="row">
+        <div class="col-lg-12  pt-5 pt-lg-0">
+            <p>{{post.body}}</p>
+        </div>
+      </div>
+
+    </div>
+  </section><!-- End Features Section -->
     
 {% endblock main %}

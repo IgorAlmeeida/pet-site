@@ -33,7 +33,7 @@
                 <!-- Card Body -->
                 <div class="card-body">
                     <div>
-                        <p maxlength=300>{{post.body}}</p>
+                        <p class="text-justify">{{post.body|slice:":600"}}</p>
                     </div>
                     <div class="mt-4 float-right">
                         <a class="btn btn-primary" href="{% url 'detail_post' idPost=post.id %}">Detalhes</a>
@@ -41,8 +41,7 @@
                 </div>
 
                 <div class="card-footer">
-                        <p>Criador por:<p>
-                        {{post.creator}}
+                    <p>Criador por: {{post.creator}}<p>
                 </div>
             </div>
         {%endfor%}

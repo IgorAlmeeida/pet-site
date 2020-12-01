@@ -10,18 +10,29 @@
 {% endblock title_pag %}
 
 {% block main %}
-<section id="features" class="features">
-    <div class="container">
-      <div class="row">
-        <h4 class="ml-3 title">{{post.title}}</h4>
-      </div>
-      <div class="row">
-        <div class="col-lg-12  pt-5 pt-lg-0">
-            <p>{{post.body}}</p>
+<section id="why-us" class="why-us">
+  <div class="container-fluid" data-aos="fade-up">
+
+    <header class="section-header">
+      <h3>{{post.title}}</h3>
+      <p>{{post.subTitle}}</p>
+    </header>
+
+    <div class="row">
+      <div class="col-1"></div>
+      <div class="col-10">
+        <div class="why-us-content">
+          <p class="text-justify">
+            {{post.body}}
+          </p>
+
         </div>
+
       </div>
+      <div class="col-1"></div>
 
     </div>
-  </section><!-- End Features Section -->
-    
+
+  </div>
+</section><!-- End Why Us Section -->
 {% endblock main %}

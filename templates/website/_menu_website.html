@@ -14,7 +14,7 @@
 <header id="header" class="fixed-top header-transparent">
     <div class="container d-flex align-items-center">
 
-        <h1 class="logo mr-auto"><a href="index.html">PET - Criativação</a></h1>
+        <h1 class="logo mr-auto"><a href="{% url 'page_home_website' %}">PET - Criativação</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -25,9 +25,11 @@
             <li><a href="{% url 'membros' %}">Membros</a></li>
             <li><a href="{% url 'selecoes' %}">Seleções</a></li>
             <li class="drop-down"><a href="">Projetos</a>
-            <ul>
-                <li><a href="#">Drop Down 1</a></li>
-            </ul>
+                <ul>
+                    {% for project in projects %}
+                        <li><a href="{% url 'projects' idProject=project.id %}">{{project.title}}</a></li>
+                    {% endfor %}
+                </ul>
             </li>
             <li><a href="{% url 'contato' %}">Contato</a></li>
         </ul>

@@ -28,7 +28,7 @@
                             <h4 class="title mb-4"><a href="{% url 'post' idPost=post.id %}">{{post.title}}</a></h4>
                         </div>
                         <div class="col-12">
-                            <p class="description">{{ post.body|slice:":200" }}...</p>
+                            <p class="description text-justify">{{ post.body|slice:":200" }}...</p>
                         </div>
                         <div class="col-12">
                             <a class="btn btn-primary position-relative" href="{% url 'post' idPost=post.id %}">Ler mais</a>

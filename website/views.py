@@ -43,6 +43,9 @@ def pageProject(request, idProject):
     data = {}
     data['projects'] = getProjects()
 
+    projectPage = Project.objects.get(id=idProject)
+    data['projectPage'] = projectPage
+
     return render(request, 'website/projetos.html', data)
 
 def getProjects():

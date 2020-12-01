@@ -26,6 +26,7 @@
                     <div class="row ">
                         <div class="col-12">
                             <h4 class="title mb-4"><a href="{% url 'post' idPost=post.id %}">{{post.title}}</a></h4>
+                            <h5 class="title" >{{post.subTitle |slice:":50"}}</h5>
                         </div>
                         <div class="col-12">
                             <p class="description text-justify">{{ post.body|slice:":200" }}...</p>

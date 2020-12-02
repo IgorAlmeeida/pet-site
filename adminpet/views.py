@@ -335,9 +335,9 @@ def deletePost(request, idPost):
     if (post == None):
         mensagem = ("Não foi possível encontrar o projeto no banco de dados")
         data['mensagem'] = mensagem
-        return render(request, 'adminpet/post/show_post.html', data)
+        return render(request, 'adminpet/post/delete_post.html', data)
     else:
         data['post'] = post
-        return render(request, 'adminpet/post/show_post.html', data)
+        return render(request, 'adminpet/post/delete_post.html', data)
 
 

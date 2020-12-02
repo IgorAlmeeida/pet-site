@@ -1,7 +1,8 @@
 from django.forms import ModelForm
 from django import forms
-from .models import Project, Cronogram, Activity
+from .models import Project, Cronogram, Activity, Profile
 from website.models import Category, Post
+from django.contrib.auth.models import User
 
 
 class ProjectForm(ModelForm):
@@ -85,4 +86,25 @@ class CategoryForm(ModelForm):
             'course': ('Curso')
         }
         widgets = {}
+
+
+class UserForm(ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput())
+    class Meta():
+        model = User
+        fields = ('username','password','email')
+
+
+class ProfileForm(ModelForm):
+     class Meta():
+         model = Profile
+         fields = ('cpf', 'ancientDate')
+         labels = {
+            'cpf': ('CPF'),
+            'ancientDate': ('Data de Nascimento')
+        }
+         widgets = {
+            'ancientDate': forms.DateInput(format=('%Y-%m-%d'), attrs={'class':'form-control','type': 'date'}),
+        }
+
 

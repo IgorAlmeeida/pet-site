@@ -19,8 +19,8 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     cpf = models.CharField(max_length=11, blank=False, null=False)
     ancientDate = models.DateField(blank=False, null=False, auto_now=False)
-    typeUser = models.ForeignKey(TypeUser, on_delete=models.DO_NOTHING)
-    active = models.BooleanField(blank=False, null=False)
+    typeUser = models.ForeignKey(TypeUser, on_delete=models.DO_NOTHING, default=2)
+    active = models.BooleanField(blank=False, null=False, default=True)
 
     def __str__(self):
         return str(self.user.username)

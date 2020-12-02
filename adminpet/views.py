@@ -1,20 +1,19 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .forms import ProjectForm, CronogramForm, ActivityForm, CategoryForm, PostForm
+from .forms import ProjectForm, CronogramForm, ActivityForm, CategoryForm, PostForm, UserForm, ProfileForm
 from .models import Project, Cronogram, Activity, Profile
 from website.models import Category, Post
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import login as auth_login
 
 # Create your views here.
 
 def home (request):
     return render(request,'adminpet/index.html')
-
-def login(request):
-    return render(request,'adminpet/login.html')
+    
 def forgotPassword(request):
     return render(request,'adminpet/forgot-password.html')
-def register(request):
-    return render(request,'adminpet/register.html')    
 
 
 #------------------------------------VIEWS PROJECT-----------------------------------------#
@@ -341,3 +340,44 @@ def deletePost(request, idPost):
         return render(request, 'adminpet/post/delete_post.html', data)
 
 
+def register(request):
+    registered = False
+    if request.method == 'POST':
+        user_form = UserForm(data=request.POST)
+        profile_form = ProfileForm(data=request.POST)
+        if user_form.is_valid() and profile_form.is_valid():
+            user = user_form.save()
+            user.set_password(user.password)
+            user.save()
+            profile = profile_form.save(commit=False)
+            profile.user = user
+            profile.save()
+            registered = True
+        else:
+            print(user_form.errors,profile_form.errors)
+    else:
+        user_form = UserForm()
+        profile_form = ProfileForm()
+    return render(request,'adminpet/register.html',
+                          {'user_form':user_form,
+                           'profile_form':profile_form,
+                           'registered':registered})
+
+ 
+def login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(username=username, password=password)
+        if user:
+            if user.is_active:
+                auth_login(request, user)
+                return redirect('page_home')
+            else:
+                return HttpResponse("Your account was inactive.")
+        else:
+            print("Someone tried to login and failed.")
+            print("They used username: {} and password: {}".format(username,password))
+            return HttpResponse("Invalid login details given")
+    else:
+        return render(request, 'adminpet/login.html', {})

@@ -135,3 +135,5 @@ DATE_INPUT_FORMT = ['YYYY-MM-DD']
 LOGIN_REDIRECT_URL = '/adm/'
 
 LOGOUT_REDIRECT_URL = '/'
+
+LOGIN_URL = '/adm/login/'

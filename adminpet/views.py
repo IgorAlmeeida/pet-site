@@ -4,11 +4,13 @@ from .forms import ProjectForm, CronogramForm, ActivityForm, CategoryForm, PostF
 from .models import Project, Cronogram, Activity, Profile
 from website.models import Category, Post
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, logout
 from django.contrib.auth import login as auth_login
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
+@login_required()
 def home (request):
     return render(request,'adminpet/index.html')
     
@@ -17,14 +19,17 @@ def forgotPassword(request):
 
 
 #------------------------------------VIEWS PROJECT-----------------------------------------#
+@login_required()
 def listProjects(request):
     projects = Project.objects.all()
     data = {'projects': projects}
     return render(request, 'adminpet/project/list_project.html', data)
 
+@login_required()
 def listMyProjects(request):
     return render(request, 'adminpet/project/list_my_projects.html')
 
+@login_required()
 def newProject(request):
     form = ProjectForm(request.POST or None)
 
@@ -37,6 +42,7 @@ def newProject(request):
         data = {'form_project': formProject}
         return render(request, 'adminpet/project/new_project.html', data)
 
+@login_required()
 def updateProject(request, id):
     data ={}
     project = Project.objects.get(id=id)
@@ -52,7 +58,7 @@ def updateProject(request, id):
     else:
         return render(request, 'adminpet/project/update_project.html', data)
 
-
+@login_required()
 def deleteProject(request, id):
     project = Project.objects.get(id=id) or None
     if (request.method == 'POST'):
@@ -69,7 +75,8 @@ def deleteProject(request, id):
         data = {}
         data['project'] = project
         return render(request, 'adminpet/project/delete_project.html', data)
-    
+
+@login_required()
 def detailProject(request, id):
     data = {}
     project = Project.objects.get(id=id or None)
@@ -83,7 +90,7 @@ def detailProject(request, id):
 
 
 #----------------------------------------VIEWS CRONOGRAM---------------------------------------#
-
+@login_required()
 def newCronogramProject(request, idProject):
     formCronogram = CronogramForm(request.POST or None)
 
@@ -103,6 +110,7 @@ def newCronogramProject(request, idProject):
 
         return render(request, 'adminpet/cronogram/new_cronogram.html', data)
 
+@login_required()
 def updateCronogramProject(request, idProject, idCronogram):
     data ={}
     project = Project.objects.get(id=idProject)
@@ -121,6 +129,7 @@ def updateCronogramProject(request, idProject, idCronogram):
     else:
         return render(request, 'adminpet/cronogram/update_cronogram.html', data)
 
+@login_required()
 def deleteCronogramProject(request, idProject, idCronogram):
     cronogram = Cronogram.objects.get(id=idCronogram)
     project = Project.objects.get(id=idProject)
@@ -141,6 +150,7 @@ def deleteCronogramProject(request, idProject, idCronogram):
         data['cronogram'] = cronogram
         return render(request, 'adminpet/cronogram/delete_cronogram.html', data)
 
+@login_required()
 def listCronogramProject(request, idProject):
     project = Project.objects.get(id=idProject)
     cronograms = Cronogram.objects.filter(project_id=idProject)
@@ -152,6 +162,7 @@ def listCronogramProject(request, idProject):
 
 #----------------------------------------VIEWS ACTIVITY---------------------------------------#
 
+@login_required()
 def newActivityProject(request, idProject):
     formActivity = ActivityForm(request.POST or None)
 
@@ -171,6 +182,7 @@ def newActivityProject(request, idProject):
 
         return render(request, 'adminpet/activity/new_activity.html', data)
 
+@login_required()
 def updateActivityProject(request, idProject, idActivity):
     data ={}
     project = Project.objects.get(id=idProject)
@@ -189,7 +201,7 @@ def updateActivityProject(request, idProject, idActivity):
     else:
         return render(request, 'adminpet/activity/update_activity.html', data)
 
-
+@login_required()
 def deleteActivityProject(request, idProject, idActivity):
     activity = Activity.objects.get(id=idActivity)
     project = Project.objects.get(id=idProject)
@@ -210,6 +222,7 @@ def deleteActivityProject(request, idProject, idActivity):
         data['activity'] = activity
         return render(request, 'adminpet/activity/delete_activity.html', data)
 
+@login_required()
 def listActivityProject(request, idProject):
     project = Project.objects.get(id=idProject)
     activitys = Activity.objects.filter(project_id=idProject)
@@ -220,7 +233,7 @@ def listActivityProject(request, idProject):
 
 
 # --------------------------------Blog----------------------------------------------------
-
+@login_required()
 def newCategory(request):
     form = CategoryForm(request.POST or None)
 
@@ -233,6 +246,7 @@ def newCategory(request):
         data = {'form_category': formCategory}
         return render(request, 'adminpet/post/new_category', data)
 
+@login_required()
 def updateCategory(request, idCategory):
     data ={}
     category = Category.objects.get(id=idCategory)
@@ -248,11 +262,13 @@ def updateCategory(request, idCategory):
     else:
         return render(request, 'adminpet/post/update_category.html', data)
 
+@login_required()
 def listCategory(request):
     categorys = Category.objects.all()
     data = {'categorys': categorys}
     return render(request, 'adminpet/post/list_category.html', data)
 
+@login_required()
 def detailCategory(request, idCategory):
     data = {}
     category = Category.objects.get(id=idCategory or None)
@@ -264,6 +280,7 @@ def detailCategory(request, idCategory):
         data['category'] = category
         return render(request, 'adminpet/post/show_post.html', data)
 
+@login_required()
 def deleteCategory(request, idCategory):
     category = Category.objects.get(id=idCategory) or None
     if (request.method == 'POST'):
@@ -281,7 +298,7 @@ def deleteCategory(request, idCategory):
         data['cateogory'] = category
         return render(request, 'adminpet/post/delete_post.html', data)
 
-
+@login_required()
 def newPost(request):
     form = PostForm(request.POST or None)
     
@@ -296,7 +313,7 @@ def newPost(request):
         data = {'form_post': formPost}
         return render(request, 'adminpet/post/new_post.html', data)
     
-
+@login_required()
 def updatePost(request, idPost):
     data ={}
     post = Post.objects.get(id=idPost)
@@ -312,11 +329,13 @@ def updatePost(request, idPost):
     else:
         return render(request, 'adminpet/post/update_post.html', data)
 
+@login_required()
 def listPost(request):
     posts = Post.objects.all()
     data = {'posts': posts}
     return render(request, 'adminpet/post/list_post.html', data)
-    
+
+@login_required()  
 def detailPost(request, idPost):
     data = {}
     post = Post.objects.get(id=idPost or None)
@@ -328,6 +347,7 @@ def detailPost(request, idPost):
         data['post'] = post
         return render(request, 'adminpet/post/show_post.html', data)
 
+@login_required()
 def deletePost(request, idPost):
     data = {}
     post = Post.objects.get(id=idPost or None)

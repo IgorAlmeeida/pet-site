@@ -17,6 +17,52 @@ def home (request):
 def forgotPassword(request):
     return render(request,'adminpet/forgot-password.html')
 
+def register(request):
+    registered = False
+    if request.method == 'POST':
+        user_form = UserForm(data=request.POST)
+        profile_form = ProfileForm(data=request.POST)
+        if user_form.is_valid() and profile_form.is_valid():
+            user = user_form.save()
+            user.set_password(user.password)
+            user.save()
+            profile = profile_form.save(commit=False)
+            profile.user = user
+            profile.save()
+            registered = True
+        else:
+            print(user_form.errors,profile_form.errors)
+    else:
+        user_form = UserForm()
+        profile_form = ProfileForm()
+    return render(request,'adminpet/register.html',
+                          {'user_form':user_form,
+                           'profile_form':profile_form,
+                           'registered':registered})
+
+def login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(username=username, password=password)
+        if user:
+            if user.is_active:
+                auth_login(request, user)
+                return redirect('page_home')
+            else:
+                return HttpResponse("Your account was inactive.")
+        else:
+            print("Someone tried to login and failed.")
+            print("They used username: {} and password: {}".format(username,password))
+            return HttpResponse("Invalid login details given")
+    else:
+        return render(request, 'adminpet/login.html', {})
+
+@login_required
+def user_logout(request):
+    logout(request)
+    return redirect('page_home_website')
+
 
 #------------------------------------VIEWS PROJECT-----------------------------------------#
 @login_required()
@@ -347,45 +393,3 @@ def deletePost(request, idPost):
     else:
         data['post'] = post
         return render(request, 'adminpet/post/delete_post.html', data)
-
-def register(request):
-    registered = False
-    if request.method == 'POST':
-        user_form = UserForm(data=request.POST)
-        profile_form = ProfileForm(data=request.POST)
-        if user_form.is_valid() and profile_form.is_valid():
-            user = user_form.save()
-            user.set_password(user.password)
-            user.save()
-            profile = profile_form.save(commit=False)
-            profile.user = user
-            profile.save()
-            registered = True
-        else:
-            print(user_form.errors,profile_form.errors)
-    else:
-        user_form = UserForm()
-        profile_form = ProfileForm()
-    return render(request,'adminpet/register.html',
-                          {'user_form':user_form,
-                           'profile_form':profile_form,
-                           'registered':registered})
-
-  
-def login(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(username=username, password=password)
-        if user:
-            if user.is_active:
-                auth_login(request, user)
-                return redirect('page_home')
-            else:
-                return HttpResponse("Your account was inactive.")
-        else:
-            print("Someone tried to login and failed.")
-            print("They used username: {} and password: {}".format(username,password))
-            return HttpResponse("Invalid login details given")
-    else:
-        return render(request, 'adminpet/login.html', {})

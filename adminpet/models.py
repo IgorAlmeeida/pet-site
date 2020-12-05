@@ -63,3 +63,10 @@ class Activity(models.Model):
     def __str__(self):
         return str(self.description)
 
+class Reunion (models.Model):
+    TYPE_REUNION = (
+        ("O", "Ordinária"),
+        ("E", "Extraórdinária"),
+    )
+
+    

@@ -1,5 +1,16 @@
 {% extends "base.html" %}
+{% load bootstrap %}
 
 {% block main %}
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Nova Categoria</h1>
+    </div>
+    <form action="{% url 'new_category'%}" method="POST">
+        {% csrf_token %}
+
+        {{form_category | bootstrap}}
+
+        <button class="btn btn-primary" type="submit">Cadastrar</button>
+    </form>
 
 {% endblock main %}

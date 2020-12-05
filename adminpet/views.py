@@ -240,11 +240,11 @@ def newCategory(request):
     if(request.method == 'POST'):
         if(form.is_valid()):
             form.save()
-            return redirect('list_post')
+            return redirect('list_category')
     else:
-        formCategory = CategoryForm()
-        data = {'form_category': formCategory}
-        return render(request, 'adminpet/post/new_category', data)
+        form = CategoryForm()
+        data = {'form_category': form}
+        return render(request, 'adminpet/category/new_category.html', data)
 
 @login_required()
 def updateCategory(request, idCategory):
@@ -258,45 +258,34 @@ def updateCategory(request, idCategory):
     if (request.method == 'POST'):
         if (formCategory.is_valid()):
             formCategory.save()
-            return redirect('list_post')
+            return redirect('list_category')
     else:
-        return render(request, 'adminpet/post/update_category.html', data)
+        return render(request, 'adminpet/category/update_category.html', data)
 
 @login_required()
 def listCategory(request):
     categorys = Category.objects.all()
     data = {'categorys': categorys}
-    return render(request, 'adminpet/post/list_category.html', data)
-
-@login_required()
-def detailCategory(request, idCategory):
-    data = {}
-    category = Category.objects.get(id=idCategory or None)
-    if (category == None):
-        mensagem = ("Não foi possível encontrar o projeto no banco de dados")
-        data['mensagem'] = mensagem
-        return render(request, 'adminpet/post/show_post.html', data)
-    else:
-        data['category'] = category
-        return render(request, 'adminpet/post/show_post.html', data)
+    return render(request, 'adminpet/category/list_category.html', data)
 
 @login_required()
 def deleteCategory(request, idCategory):
     category = Category.objects.get(id=idCategory) or None
+
     if (request.method == 'POST'):
         if (category != None):
             category.delete()
-            return redirect ('list_project')
+            return redirect ('list_category')
         else:
             data = {}
             mensagem = ("Projeto não encontrado.")
             data['mensagem'] = mensagem
-            return render(request, 'adminpet/post/delete_post.html', data)
+            return render(request, 'adminpet/category/delete_post.html', data)
 
     else:
         data = {}
-        data['cateogory'] = category
-        return render(request, 'adminpet/post/delete_post.html', data)
+        data['category'] = category
+        return render(request, 'adminpet/category/delete_category.html', data)
 
 @login_required()
 def newPost(request):
@@ -358,7 +347,6 @@ def deletePost(request, idPost):
     else:
         data['post'] = post
         return render(request, 'adminpet/post/delete_post.html', data)
-
 
 def register(request):
     registered = False

@@ -93,15 +93,22 @@ class UserForm(ModelForm):
     class Meta():
         model = User
         fields = ('username','password','email')
+        labels = {
+            'username': ('Usuário'),
+            'password': ('Senha'),
+            'email':('Email'),
+        }
 
 
 class ProfileForm(ModelForm):
      class Meta():
          model = Profile
-         fields = ('cpf', 'ancientDate')
+         fields = ('completeName','cpf', 'sexo', 'ancientDate')
          labels = {
             'cpf': ('CPF'),
-            'ancientDate': ('Data de Nascimento')
+            'ancientDate': ('Data de Nascimento'),
+            'sexo':('Sexo'),
+            'completeName': ('Nome Completo')
         }
          widgets = {
             'ancientDate': forms.DateInput(format=('%Y-%m-%d'), attrs={'class':'form-control','type': 'date'}),

@@ -7,6 +7,7 @@ from adminpet.models import Project
 def home(request):
     data = {}
     data['projects'] = getProjects()
+    data['posts'] = Post.objects.all().order_by('-id')[:10:1]
     return render(request, 'website/index.html', data)
 
 def pageBlog(request):

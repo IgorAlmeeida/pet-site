@@ -15,24 +15,41 @@
 
       <div class="container" data-aos="fade-up">
         <div class="row">
-
-          <div class="col-lg-5 col-md-6">
-            <div class="about-img" data-aos="fade-right" data-aos-delay="100">
-              <img src="assets/img/about-img.jpg" alt="">
-            </div>
-          </div>
-
-          <div class="col-lg-7 col-md-6">
+          <div class="col-lg-12 col-md-6">
             <div class="about-content" data-aos="fade-left" data-aos-delay="100">
-              <h2>About Us</h2>
-              <h3>Odio sed id eos et laboriosam consequatur eos earum soluta.</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-              <p>Aut dolor id. Sint aliquam consequatur ex ex labore. Et quis qui dolor nulla dolores neque. Aspernatur consectetur omnis numquam quaerat. Sed fugiat nisi. Officiis veniam molestiae. Et vel ut quidem alias veritatis repudiandae ut fugit. Est ut eligendi aspernatur nulla voluptates veniam iusto vel quisquam. Fugit ut maxime incidunt accusantium totam repellendus eum error. Et repudiandae eum iste qui et ut ab alias.</p>
-              <ul>
-                <li><i class="ion-android-checkmark-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-                <li><i class="ion-android-checkmark-circle"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-                <li><i class="ion-android-checkmark-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</li>
-              </ul>
+              <h2 class="text-center mb-5">Sobre Nós</h2>
+              <h3></h3>
+              <p class="text-justify" style="text-indent: 4ch;">
+                Nas últimas duas décadas o Brasil apresentou um forte e consistente crescimento 
+                na produção científica, consequência direta de sua exitosa política de pós-graduação e de uma visão por parte da sociedade da 
+                importância da ciência e tecnologia. Por outro lado, esse crescimento não veio acompanhado de uma melhoria substancial em 
+                outras questões chaves para o desenvolvimento do país como, por exemplo, o ensino de ciências e o número de patentes depositadas 
+                por brasileiros. Fica cada vez mais claro que educação, ciência e inovação são pilares necessários para a melhoria das condições 
+                de vida da população.</p>
+              <p class="text-justify" style="text-indent: 4ch;">
+                O PET CRIATIVAÇÃO tem como eixo central o uso de uma cultura inovadora na melhoria 
+                das condições de vida e sustentabilidade econômica da população do agreste meridional de Pernambuco. Sua concepção parte do princípio 
+                que uma cultura inovadora é chave para a melhoria nas condições de vida dessas populações.</p>
+              <p class="text-justify" style="text-indent: 4ch;">
+                Apesar do discurso da inovação geralmente se referir a indústria, consideramos que inovar deve fazer parte do fazer contidiano das pessoas, 
+                e a educação tem papel chave nessa mudança imbuindo na estrutura cognitiva do educando, juntamente com o conhecimento, uma busca incessante pelo novo. Apesar da academia 
+                ter como objetivo a produção e difusão do conhecimento, é cada vez mais necessário que, em conformidade com a contemporaneidade, ela 
+                desenvolva uma cultura inovadora e que incentive essa cultura nos seus estudantes. O grupo PET CRIATIVAÇÃO pretende ser uma ferramenta e 
+                instrumento de estimular a inovação em todo o âmbito acadêmico da UFAPE. Vários índices internacionais apontam que um dos mais graves entraves 
+                ao crescimento sustentável do Brasil é a manutenção de uma cultura pouco inovadora, fruto de uma herança escravagista-extrativista com sérios 
+                problemas na educação. Segundo um estudo da Organização Mundial da Propriedade Intelectual, o Brasil ocupa a 58ª posição entre 144 países 
+                analisados em aspectos relativos à inovação, segundo esse documento, o Brasil terá sérios problemas para retomar o crescimento caso não mude 
+                essa situação. </p>
+                
+                <p class="text-justify" style="text-indent: 4ch;">A cultura inovadora deve começar em sala de aula, assim nas atividades relacionadas abaixo os petianos são incentivados tanto a 
+                buscar formas inovadoras no seu cotidiano escolar, incluindo um uso mais abrangente das tecnologias da informação, quanto a entender formas 
+                inovadoras de lecionar sob a ótica da pedagogia da inovação. Por outro lado, o grupo irá conduzir pesquisas que envolvam a compreensão do que é 
+                inovar em seus cursos específicos, tomando como foco a inovação tecnológica. Assim, os petianos deverão levar a população, através de atividades 
+                de extensão, a prática que desenvolveram em sala de aula com os resultados das suas pesquisas, integrando assim os três pilares básicos 
+                da universidade.</p>
+
+                <p class="text-right">Alberto E. P. Araujo</p>
+
             </div>
           </div>
         </div>
@@ -44,50 +61,22 @@
       <div class="container" data-aos="zoom-in">
 
         <header class="section-header">
-          <h3>Testimonials</h3>
+          <h3>Últimos Posts</h3>
         </header>
 
         <div class="row justify-content-center">
-          <div class="col-lg-8">
+          <div class="col-12">
 
             <div class="owl-carousel testimonials-carousel">
-
+              {% for post in posts %}
               <div class="testimonial-item">
-                <img src="assets/img/testimonial-1.jpg" class="testimonial-img" alt="">
-                <h3>Saul Goodman</h3>
-                <h4>Ceo &amp; Founder</h4>
+                <h3><a href="{% url 'post' idPost=post.id %}" >{{post.title}}</a></h3>
+                <h4>{{post.subTitle}}</h4>
                 <p>
-                  Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
+                  {{post.body|slice:":200"}}
                 </p>
               </div>
-
-              <div class="testimonial-item">
-                <img src="assets/img/testimonial-2.jpg" class="testimonial-img" alt="">
-                <h3>Sara Wilsson</h3>
-                <h4>Designer</h4>
-                <p>
-                  Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.
-                </p>
-              </div>
-
-              <div class="testimonial-item">
-                <img src="assets/img/testimonial-3.jpg" class="testimonial-img" alt="">
-                <h3>Jena Karlis</h3>
-                <h4>Store Owner</h4>
-                <p>
-                  Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.
-                </p>
-              </div>
-
-              <div class="testimonial-item">
-                <img src="assets/img/testimonial-4.jpg" class="testimonial-img" alt="">
-                <h3>Matt Brandon</h3>
-                <h4>Freelancer</h4>
-                <p>
-                  Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.
-                </p>
-              </div>
-
+              {% endfor %}
             </div>
 
           </div>
@@ -100,8 +89,8 @@
     <section id="faq" class="faq">
       <div class="container" data-aos="fade-up">
         <header class="section-header">
-          <h3>Frequently Asked Questions</h3>
-          <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p>
+          <h3>Perguntas Frequentes</h3>
+          <p></p>
         </header>
 
         <ul id="faq-list" data-aos="fade-up" data-aos-delay="100">

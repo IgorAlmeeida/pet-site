@@ -187,6 +187,7 @@
     dots: true,
     loop: true,
     items: 1
+
   });
 
   // Clients carousel (uses the Owl Carousel library)

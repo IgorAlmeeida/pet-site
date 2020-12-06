@@ -72,8 +72,8 @@
               <div class="testimonial-item">
                 <h3><a href="{% url 'post' idPost=post.id %}" >{{post.title}}</a></h3>
                 <h4>{{post.subTitle}}</h4>
-                <p>
-                  {{post.body|slice:":200"}}
+                <p class="text-justify">
+                  {{post.body|slice:":400"}}
                 </p>
               </div>
               {% endfor %}

@@ -15,7 +15,7 @@ class Person (models.Model):
     email = models.EmailField(blank=False, null=False, unique=True)
     hash_fnde = models.CharField(max_length=200, blank=False, null=False)
     institution = models.OneToOneField('Institution',on_delete=models.SET_NULL, null=True) 
-    function = models.OneToOneField('Function',on_delete=models.SET_NULL, null=True)
+    function = models.OneToOneField('Function',on_delete=models.SET_NULL, null=True) 
 
 class Bag(models.Model):
     person = models.ForeignKey('Person', on_delete=models.CASCADE, default=None) 

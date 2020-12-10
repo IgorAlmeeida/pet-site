@@ -38,20 +38,24 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Criar Conta</h1>
                             </div>
-                            <form class="user" enctype="multipart/form-data" method="POST">
-                                {% csrf_token %}
-                                {{ user_form | bootstrap}}
-                                {{ profile_form | bootstrap}}
-                                <input type="submit" name="" class="btn btn-primary btn-user btn-block"
-                                    value="Register Account">
-                            </form>
+                            {% if registered == False %}
+                                <form class="user" enctype="multipart/form-data" method="POST">
+                                    {% csrf_token %}
+                                    {{ user_form | bootstrap}}
+                                    {{ profile_form | bootstrap}}
+                                    <input type="submit" name="" class="btn btn-primary btn-user btn-block"
+                                        value="Registrar-se">
+                                </form>
+                            {% else %}
+                                <div class="card"><h2>Registro realizado com sucesso</h2></div>
+                            {% endif %}
 
                             <hr>
                             <div class="text-center">
                                 <a class="small" href="#">Esqueceu a Senha?</a>
                             </div>
                             <div class="text-center">
-                                <a class="small" href="{% url 'login' %}">Already have an account? Login!</a>
+                                <a class="small" href="{% url 'login' %}">Já possue conta? Login!</a>
                             </div>
                         </div>
                     </div>

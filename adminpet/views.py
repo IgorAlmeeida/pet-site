@@ -35,12 +35,16 @@ def register(request):
     else:
         user_form = UserForm()
         profile_form = ProfileForm()
+    
     return render(request,'adminpet/register.html',
                           {'user_form':user_form,
                            'profile_form':profile_form,
                            'registered':registered})
 
 def login(request):
+    data = {}
+    mensagem = None
+
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -50,13 +54,11 @@ def login(request):
                 auth_login(request, user)
                 return redirect('page_home')
             else:
-                return HttpResponse("Your account was inactive.")
+                mensagem = ("Sua conta está inativa.")
         else:
-            print("Someone tried to login and failed.")
-            print("They used username: {} and password: {}".format(username,password))
-            return HttpResponse("Invalid login details given")
-    else:
-        return render(request, 'adminpet/login.html', {})
+            mensagem = ("Dados de login inválidos.")
+    data['mensagem'] = mensagem
+    return render(request, 'adminpet/login.html', data)
 
 @login_required
 def user_logout(request):

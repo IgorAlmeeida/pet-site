@@ -44,6 +44,12 @@
                                         <h1 class="h4 text-gray-900 mb-4">Criativação Login</h1>
                                     </div>
 
+                                    {% if mensagem != None %}
+                                    <div class="text-center">
+                                        <h5 class="h4 text-gray-900 mb-4">{{mensagem}}</h5>
+                                    </div>
+                                    {% endif %}
+
                                     <form class="user" method="post" action="{% url 'login' %}">
                                         {% csrf_token %}
                                         <div class="form-group">

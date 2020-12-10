@@ -7,3 +7,7 @@ python-decouple==3.3
 pytz==2020.1
 sqlparse==0.4.1
 static3==0.7.0
+pylint==2.6.0
+pylint-django==2.3.0
+pylint-plugin-utils==0.6
+

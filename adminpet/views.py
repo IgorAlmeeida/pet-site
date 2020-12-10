@@ -1,6 +1,12 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .forms import ProjectForm, CronogramForm, ActivityForm, CategoryForm, PostForm, UserForm, ProfileForm
+from .forms import (ProjectForm, 
+                    CronogramForm, 
+                    ActivityForm, 
+                    CategoryForm, 
+                    PostForm, 
+                    UserForm, 
+                    ProfileForm)
 from .models import Project, Cronogram, Activity, Profile
 from website.models import Category, Post
 from django.contrib.auth.models import User

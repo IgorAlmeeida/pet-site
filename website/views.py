@@ -15,6 +15,7 @@ def pageBlog(request):
     data = {}
     data['posts'] = posts
     data['projects'] = getProjects()
+    
     return render(request, 'website/blog.html', data)
 
 def pageMembers(request):

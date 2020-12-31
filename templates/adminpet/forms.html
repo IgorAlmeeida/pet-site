@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load bootstrap %}
+
+{% block main %}
+
+<div class="card shadow mb-4">
+    <!-- Card Header - Dropdown -->
+    <div class="card-header py-3 flex-row align-items-center bg-gray-200">
+        <div class="mr-auto">
+            {% block title_page %}
+            {% endblock title_page %}
+        </div>
+    </div>
+
+    <div class="card-body">
+        {% block form_body %}
+        {% endblock form_body %}
+    </div>
+
+</div>
+    
+{% endblock main %}

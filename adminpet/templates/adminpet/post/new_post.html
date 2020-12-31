@@ -1,16 +1,16 @@
-{% extends "base.html" %}
+{% extends "forms.html" %}
 {% load bootstrap %}
 
-{% block main %}
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Novo Post</h1>
-    </div>
+{% block title_page %}
+    <h1 class="h3 mb-0 text-gray-800">Novo Post</h1>
+{% endblock title_page %}
+
+{% block form_body %}
     <form action="{% url 'new_post'%}" method="POST">
         {% csrf_token %}
         
         {{form_post | bootstrap}}
 
-        <button class="btn btn-primary"type="submit">Cadastrar</button>
+        <button class="btn btn-primary float-right"type="submit">Cadastrar</button>
     </form>
-    
-{% endblock main %}
+{% endblock form_body %}

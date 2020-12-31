@@ -77,7 +77,15 @@ def user_logout(request):
 #------------------------------------VIEWS PROJECT-----------------------------------------#
 @login_required()
 def listProjects(request):
-    projects_list = Project.objects.all()
+
+    search = request.GET.get("search")
+
+    projects_list = []
+
+    if (search):
+        projects_list = Project.objects.filter(title__icontains = search)
+    else: 
+        projects_list = Project.objects.all()
 
     paginator = Paginator(list(projects_list), 10)
 
@@ -217,8 +225,16 @@ def deleteCronogramProject(request, idProject, idCronogram):
 
 @login_required()
 def listCronogramProject(request, idProject):
+
+    search = request.GET.get("search")
     project = Project.objects.get(id=idProject)
-    cronogram_list = Cronogram.objects.filter(project_id=idProject)
+
+    cronogram_list = []
+
+    if (search):
+        cronogram_list = Cronogram.objects.filter(project_id=idProject,title__icontains = search)
+    else: 
+        cronogram_list = Cronogram.objects.filter(project_id=idProject)
 
     paginator = Paginator(list(cronogram_list),20)
 

@@ -1,15 +1,19 @@
-{% extends 'base.html' %}
+{% extends 'list_admin.html' %}
 {% load static %}
 
-{% block main %}
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Lista de Projetos</h1>
-        <a class="btn btn-primary" href="{%url 'new_project'%}">Novo Projeto</a>
-    </div>
 
+{% block title_list %}
+    <h1 class="h3 mb-0 text-gray-800">Projetos</h1>
+{% endblock title_list %}
+
+{% block button_new_object %}
+    <a class="btn btn-primary" href="{%url 'new_project'%}">Novo Projeto</a>
+{% endblock button_new_object %}
+
+{% block card_body %}
     <div class="col-12">
         <!-- Dropdown Card Example -->
-        {% for project in projects%}
+        {% for project in objects%}
             <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -52,5 +56,5 @@
             </div>
         {%endfor%}
     </div>
+{% endblock card_body %}
 
-{% endblock main %}

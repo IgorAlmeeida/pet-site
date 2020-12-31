@@ -1,12 +1,16 @@
-{% extends 'base.html' %}
+{% extends 'list_admin.html' %}
 {% load static %}
 
-{% block main %}
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Categoria</h1>
-        <a class="btn btn-primary" href="{%url 'new_category' %}">Nova Cateogira</a>
-    </div>
-    <!-- DataTales Example -->
+
+{% block title_list %}
+    <h1 class="h3 mb-0 text-gray-800">Categoria Post</h1>
+{% endblock title_list %}
+
+{% block button_new_object %}
+    <a class="btn btn-primary" href="{%url 'new_category' %}">Nova Cateogira</a>
+{% endblock button_new_object %}
+
+{% block card_body %}
     <div class="card shadow mb-4">
         <div class="card-header py-3">
         </div>
@@ -47,6 +51,4 @@
             </div>
         </div>
     </div>
-
-
-{% endblock main %}
+{% endblock card_body %}

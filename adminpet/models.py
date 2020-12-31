@@ -1,24 +1,24 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.conf import settings
 
 # Create your models here.
 
 class Profile(models.Model):
     SEXO_CHOICES = (
-        ("F", "Feminino"),
-        ("M", "Masculino"),
+        ("Feminino", "Feminino"),
+        ("Masculino", "Masculino"),
     )
 
     TYPE_USER = (
-        ("T", "Tutor"),
-        ("P", "Petiano"),
+        ("Tutor", "Tutor"),
+        ("Petiano", "Petiano"),
     )
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     completeName = models.CharField(max_length=150, blank=False, null=False)
-    sexo = models.CharField(max_length=2, blank=False, null=False, choices=SEXO_CHOICES)
+    sexo = models.CharField(max_length=20, blank=False, null=False, choices=SEXO_CHOICES)
     cpf = models.CharField(max_length=11, blank=False, null=False)
     ancientDate = models.DateField(blank=False, null=False, auto_now=False)
-    typeUser = models.CharField(max_length=2, blank=False, null=False, choices=TYPE_USER, default="P")
+    typeUser = models.CharField(max_length=20, blank=False, null=False, choices=TYPE_USER, default="Petiano")
     active = models.BooleanField(blank=False, null=False, default=True)
 
     def __str__(self):
@@ -27,8 +27,8 @@ class Profile(models.Model):
 class Project(models.Model):
 
     STATUS = (
-        ("A", "Ativo"),
-        ("I", "Inativo"),
+        ("Ativo", "Ativo"),
+        ("Inativo", "Inativo"),
     )
     
     title = models.CharField(max_length=200, blank=False, null=False)
@@ -39,7 +39,7 @@ class Project(models.Model):
     creators = models.ManyToManyField(Profile)
     reference = models.TextField(blank=False, null=False)
     createDate = models.DateField(blank=False, null=False, auto_now=True)
-    status = models.CharField(max_length=2, blank=False, null=False, choices=STATUS, default="A")
+    status = models.CharField(max_length=20, blank=False, null=False, choices=STATUS, default="Ativo")
 
     def __str__(self):
         return str(self.title)
@@ -65,8 +65,13 @@ class Activity(models.Model):
 
 class Reunion (models.Model):
     TYPE_REUNION = (
-        ("O", "Ordinária"),
-        ("E", "Extraórdinária"),
+        ("Ordinária", "Ordinária"),
+        ("Extraórdinária", "Extraórdinária"),
     )
-
+    title = models.CharField(max_length=50, blank=False, null=False)
+    present = models.ManyToManyField(Profile)
+    ata = models.TextField()
+    dateReunion = models.DateField(blank=False, null=False)
+    typeReunion = models.CharField(max_length=20, choices=TYPE_REUNION, default='Ordinária', blank=False, null=False)
+ 
     

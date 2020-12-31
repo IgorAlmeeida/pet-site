@@ -1,15 +1,17 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.core.paginator import Paginator
 from .forms import (ProjectForm, 
                     CronogramForm, 
                     ActivityForm, 
                     CategoryForm, 
                     PostForm, 
                     UserForm, 
-                    ProfileForm)
-from .models import Project, Cronogram, Activity, Profile
+                    ProfileForm, 
+                    ReunionForm)
+from .models import Project, Cronogram, Activity, Profile, Reunion
 from website.models import Category, Post
-from django.contrib.auth.models import User
+from django.conf import settings
 from django.contrib.auth import authenticate, logout
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.decorators import login_required
@@ -75,8 +77,17 @@ def user_logout(request):
 #------------------------------------VIEWS PROJECT-----------------------------------------#
 @login_required()
 def listProjects(request):
-    projects = Project.objects.all()
-    data = {'projects': projects}
+    projects_list = Project.objects.all()
+
+    paginator = Paginator(list(projects_list), 10)
+
+    page = request.GET.get("page")
+
+    projects = paginator.get_page(page)
+
+    data = {}
+    data['objects'] = projects
+    data['paginator'] = paginator
     return render(request, 'adminpet/project/list_project.html', data)
 
 @login_required()
@@ -207,10 +218,18 @@ def deleteCronogramProject(request, idProject, idCronogram):
 @login_required()
 def listCronogramProject(request, idProject):
     project = Project.objects.get(id=idProject)
-    cronograms = Cronogram.objects.filter(project_id=idProject)
+    cronogram_list = Cronogram.objects.filter(project_id=idProject)
+
+    paginator = Paginator(list(cronogram_list),20)
+
+    page = request.GET.get("page")
+
+    cronograms = paginator.get_page(page)
+
     data = {}
     data['project'] = project
-    data['cronograms'] = cronograms
+    data['objects'] = cronograms
+    data['paginator'] = paginator
     return render(request, 'adminpet/cronogram/list_cronogram.html', data)
 
 
@@ -278,11 +297,21 @@ def deleteActivityProject(request, idProject, idActivity):
 
 @login_required()
 def listActivityProject(request, idProject):
+
     project = Project.objects.get(id=idProject)
-    activitys = Activity.objects.filter(project_id=idProject)
+    activity_list = Activity.objects.filter(project_id=idProject)
+
+    paginator = Paginator(list(activity_list), 10)
+
+    page = request.GET.get("page")
+
+    activitys = paginator.get_page(page)
+
     data = {}
     data['project'] = project
-    data['activitys'] = activitys
+    data['objects'] = activitys
+    data['paginator'] = paginator
+
     return render(request, 'adminpet/activity/list_activity.html', data)
 
 
@@ -318,8 +347,16 @@ def updateCategory(request, idCategory):
 
 @login_required()
 def listCategory(request):
-    categorys = Category.objects.all()
-    data = {'categorys': categorys}
+    category_list = Category.objects.all()
+    paginator = Paginator(list(category_list), 10)
+
+    page = request.GET.get("page")
+
+    categorys = paginator.get_page(page)
+
+    data = {}
+    data['objects'] =  categorys
+    data['paginator'] = paginator
     return render(request, 'adminpet/category/list_category.html', data)
 
 @login_required()
@@ -374,8 +411,16 @@ def updatePost(request, idPost):
 
 @login_required()
 def listPost(request):
-    posts = Post.objects.all()
-    data = {'posts': posts}
+    post_list = Post.objects.all()
+    paginator = Paginator(list(post_list),10)
+
+    page = request.GET.get("page")
+
+    posts = paginator.get_page(page)
+
+    data = {}
+    data['objects'] = posts
+    data['paginator'] = paginator
     return render(request, 'adminpet/post/list_post.html', data)
 
 @login_required()  
@@ -401,3 +446,32 @@ def deletePost(request, idPost):
     else:
         data['post'] = post
         return render(request, 'adminpet/post/delete_post.html', data)
+
+
+@login_required()
+def createReunion(request):
+    form = ReunionForm(request.POST or None)
+    
+    if(request.method == 'POST'):
+        if(form.is_valid()):
+            form.save()
+            return redirect('list_reunion')
+    else:
+        form = ReunionForm()
+        profile = Profile.objects.get(user_id=request.user.id)
+        formPost.fields["creator"].initial = profile.id
+        data = {'form_post': formPost}
+        return render(request, 'adminpet/post/new_post.html', data)
+    return ''
+
+@login_required()
+def updateReunion(request, id):
+    return ''
+
+@login_required()
+def listReunion(request):
+    return ''
+
+@login_required()
+def deleteReunion(request, id):
+    return ''

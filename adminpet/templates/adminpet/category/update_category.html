@@ -1,16 +1,17 @@
-{% extends "base.html" %}
+{% extends "forms.html" %}
 {% load bootstrap %}
 
-{% block main %}
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Atualizar Categoria</h1>
-    </div>
+{% block title_page %}
+    <h1 class="h3 mb-0 text-gray-800">Atualizar {{category.title}}</h1>
+{% endblock title_page %}
+
+{% block form_body %}
     <form action="{% url 'update_category' idCategory=category.id %}" method="POST">
         {% csrf_token %}
         
         {{form_category | bootstrap}}
 
-        <button class="btn btn-primary"type="submit">Salvar</button>
+        <button class="btn btn-primary float-right"type="submit">Salvar</button>
     </form>
-    
-{% endblock main %}
+{% endblock form_body %}
+

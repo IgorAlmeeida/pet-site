@@ -2,17 +2,14 @@
 
 {% block main %}
 
-<div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Deletar Post - {{post.title}}</h1>
-</div>
-
 <div class="card shadow mb-4">
     <div class="card-body">
         <form action="{% url 'delete_project' id=post.id%}" method="POST">
             {% csrf_token %}
             <p>Deseja deletar o post: {{post.title}}<p>
 
-            <button class="btn btn-danger"type="submit">Excluir</button>
+            <a class="btn btn-primary float-right ml-2" href="{% url 'list_post' %}">Voltar</a>
+            <button class="btn btn-danger float-right"type="submit">Excluir</button>
         </form>
     </div>
 </div>

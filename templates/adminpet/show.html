@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main %}
+
+    <div class="card shadow mb-4">
+        <!-- Card Header - Dropdown -->
+        <div class="card-header py-3 flex-row align-items-center bg-gray-200">
+            <div class="mr-auto ml-3 mb-2">
+            {% block title_show %}
+
+            {% endblock title_show %}
+            </div>
+
+        </div>
+
+        <div class="card-body">
+            {% block card_body %}
+            {% endblock card_body %}
+        </div>
+
+        <div class="card-footer bg-gray-200">
+            {% block button_back %}
+            {% endblock button_back %}
+        </div>
+    </div>
+
+{% endblock main %}

@@ -1,11 +1,10 @@
-{% extends 'base.html' %}
-{% load static %}
-{% load bootstrap %}
+{% extends "show.html" %}
 
-{% block main %}
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">{{project.title}}</h1>
-    </div>
+{% block title_show %}
+    <h1 class="h3 mb-0 text-gray-800">{{project.title}}</h1>
+{% endblock title_show %}
+
+{% block card_body %}
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Introdução</h6>
@@ -65,6 +64,9 @@
             <p class='float-right'>Criado em {{project.createDate}}</p>
 
         </div>
-    </div>      
+    </div>     
+{% endblock card_body %}
     
-{% endblock main %}
+{% block button_back %}
+    <a class="btn btn-primary float-right" href="{% url 'list_project'%}" type="submit">Voltar</a>
+{% endblock button_back %}

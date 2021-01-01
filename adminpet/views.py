@@ -314,8 +314,15 @@ def deleteActivityProject(request, idProject, idActivity):
 @login_required()
 def listActivityProject(request, idProject):
 
+    search = request.GET.get("search")
     project = Project.objects.get(id=idProject)
-    activity_list = Activity.objects.filter(project_id=idProject)
+
+    activity_list = []
+
+    if (search):
+        activity_list = Activity.objects.filter(project_id=idProject,title__icontains = search)
+    else: 
+        activity_list = Activity.objects.filter(project_id=idProject)
 
     paginator = Paginator(list(activity_list), 10)
 
@@ -329,7 +336,6 @@ def listActivityProject(request, idProject):
     data['paginator'] = paginator
 
     return render(request, 'adminpet/activity/list_activity.html', data)
-
 
 # --------------------------------Blog----------------------------------------------------
 @login_required()
@@ -363,7 +369,17 @@ def updateCategory(request, idCategory):
 
 @login_required()
 def listCategory(request):
-    category_list = Category.objects.all()
+
+    search = request.GET.get("search")
+    project = Project.objects.get(id=idProject)
+
+    category_list = []
+
+    if (search):
+        category_list = Category.objects.filter(project_id=idProject,title__icontains = search)
+    else: 
+        category_list = Category.objects.filter(project_id=idProject)
+
     paginator = Paginator(list(category_list), 10)
 
     page = request.GET.get("page")
@@ -427,7 +443,16 @@ def updatePost(request, idPost):
 
 @login_required()
 def listPost(request):
-    post_list = Post.objects.all()
+
+    search = request.GET.get("search")
+
+    post_list = []
+
+    if (search):
+        post_list = Post.objects.filter(title__icontains = search)
+    else: 
+        post_list = Post.objects.all()
+    
     paginator = Paginator(list(post_list),10)
 
     page = request.GET.get("page")
@@ -455,10 +480,14 @@ def detailPost(request, idPost):
 def deletePost(request, idPost):
     data = {}
     post = Post.objects.get(id=idPost or None)
-    if (post == None):
-        mensagem = ("Não foi possível encontrar o projeto no banco de dados")
-        data['mensagem'] = mensagem
-        return render(request, 'adminpet/post/delete_post.html', data)
+    if request.method == "POST":
+        if (post == None):
+            mensagem = ("Não foi possível encontrar o projeto no banco de dados")
+            data['mensagem'] = mensagem
+            return render(request, 'adminpet/post/delete_post.html', data)
+        else:
+            post.delete()
+            redirect('list_post')
     else:
         data['post'] = post
         return render(request, 'adminpet/post/delete_post.html', data)
@@ -474,20 +503,61 @@ def createReunion(request):
             return redirect('list_reunion')
     else:
         form = ReunionForm()
-        profile = Profile.objects.get(user_id=request.user.id)
-        formPost.fields["creator"].initial = profile.id
-        data = {'form_post': formPost}
-        return render(request, 'adminpet/post/new_post.html', data)
-    return ''
+        data = {'form_reunion': form}
+        return render(request, 'adminpet/reunion/new_reunion.html', data)
 
 @login_required()
-def updateReunion(request, id):
-    return ''
+def updateReunion(request, idReunion):
+    data ={}
+    reunion = Reunion.objects.get(id=idReunion)
+    form = ReunionForm(request.POST or None, instance=reunion)
+
+    data['reunion'] = reunion
+    data['form_reunion'] = form
+
+    if (request.method == 'POST'):
+        if (form.is_valid()):
+            form.save()
+            return redirect('list_reunion')
+    else:
+        return render(request, 'adminpet/reunion/update_reunion.html', data)
 
 @login_required()
 def listReunion(request):
-    return ''
+    search = request.GET.get("search")
+
+    reunion_list = []
+
+    if (search):
+        reunion_list = Reunion.objects.filter(title__icontains = search)
+    else: 
+        reunion_list = Reunion.objects.all()
+    
+    paginator = Paginator(list(reunion_list),10)
+
+    page = request.GET.get("page")
+
+    posts = paginator.get_page(page)
+
+    data = {}
+    data['objects'] = posts
+    data['paginator'] = paginator
+    return render(request, 'adminpet/reunion/list_reunion.html', data)
 
 @login_required()
-def deleteReunion(request, id):
-    return ''
+def deleteReunion(request, idReunion):
+    data = {}
+    reunion = Reunion.objects.get(id=idReunion or None)
+    if request.method == "POST":
+        if (reunion == None):
+            mensagem = ("Não foi possível encontrar o projeto no banco de dados")
+            data['mensagem'] = mensagem
+            data['reunion'] = reunion
+            return render(request, 'adminpet/reunion/delete_reunion.html', data)
+        else:
+            reunion.delete()
+            return redirect('list_reunion')
+    else:
+        data['reunion'] = reunion
+        return render(request, 'adminpet/reunion/delete_reunion.html', data)
+

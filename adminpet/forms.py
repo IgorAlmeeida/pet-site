@@ -125,6 +125,6 @@ class ReunionForm(ModelForm):
             'dateReunion': ('Data')
         }
         widgets = {
-            'ancientDate': forms.DateInput(format=('%Y-%m-%d'), attrs={'class':'form-control','type': 'date'}),
+            'dateReunion': forms.DateInput(format=('%Y-%m-%d'), attrs={'class':'form-control','type': 'date'}),
         }
 

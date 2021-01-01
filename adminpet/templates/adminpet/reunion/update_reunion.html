@@ -1,0 +1,16 @@
+{% extends "forms.html" %}
+{% load bootstrap %}
+
+{% block title_page %}
+    <h1 class="h3 mb-0 text-gray-800">Atualizar {{reunion.title}}</h1>
+{% endblock title_page %}
+
+{% block form_body %}
+    <form action="{% url 'update_reunion' idReunion=reunion.id %}" method="POST">
+        {% csrf_token %}
+        
+        {{form_reunion | bootstrap}}
+
+        <button class="btn btn-primary float-right" type="submit">Salvar</button>
+    </form> 
+{% endblock form_body %}

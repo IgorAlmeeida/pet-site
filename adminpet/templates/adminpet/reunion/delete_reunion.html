@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap %}
+
+
+{% block main %}
+
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <form action="{% url 'delete_reunion' idReunion=reunion.id%}" method="POST">
+                {% csrf_token %}
+                <p>Deseja deletar o projeto: {{reunion.title}}<p>
+                
+                <a class="btn btn-primary float-right ml-2" href="{% url 'list_project' %}">Voltar</a>
+                <button class="btn btn-danger float-right"type="submit">Excluir</button>
+            </form>
+        </div>
+    </div>
+
+    
+{% endblock main %}

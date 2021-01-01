@@ -26,7 +26,11 @@ from .views import ( home,
                     newPost,
                     detailPost,
                     listPost,
-                    updatePost)
+                    updatePost,
+                    createReunion,
+                    updateReunion,
+                    listReunion,
+                    deleteReunion)
                     
 urlpatterns = [
     path('', home, name='page_home'),
@@ -62,6 +66,11 @@ urlpatterns = [
     path('blog/categoria/update/<int:idCategory>',updateCategory, name='update_category'),
     path('blog/categoria/delete/<int:idCategory>',deleteCategory, name='delete_category'),
     path('blog/categoria/list',listCategory, name='list_category'),
+
+    path('reuniao/new',createReunion, name='new_reunion'),
+    path('reuniao/update/<int:idReunion>',updateReunion, name='update_reunion'),
+    path('reuniao/delete/<int:idReunion>',deleteReunion, name='delete_reunion'),
+    path('reuniao/list',listReunion, name='list_reunion'),
 
 
 

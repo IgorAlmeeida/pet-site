@@ -1,0 +1,59 @@
+{% extends 'list_admin.html' %}
+{% load static %}
+
+
+{% block title_list %}
+    <h1 class="h3 mb-0 text-gray-800">Reuniões</h1>
+{% endblock title_list %}
+
+{% block button_new_object %}
+    <a class="btn btn-primary" href="{%url 'new_reunion' %}">Nova Reunião</a>
+{% endblock button_new_object %}
+
+{% block card_body %}
+    <div class="col-12">
+        <!-- Dropdown Card Example -->
+        {% for reunion in objects %}
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div
+                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">{{reunion.title}}</h6>
+                    <div class="dropdown no-arrow">
+                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                            aria-labelledby="dropdownMenuLink">
+                            <div class="dropdown-header">Opções</div>
+                            <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{% url 'update_reunion' idReunion=reunion.id %}">Atualizar</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{% url 'delete_reunion' idReunion=reunion.id %}">Deletar</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    Data: {{reunion.dateReunion}} <br>
+                    Tipo: {{reunion.typeReunion}} <br>
+                    Ata: {{reunion.ata}} <br>
+                    Paticipantes:                             
+                    {%for present in reunion.present.all %}
+                        {{present}}
+                    {%endfor%}
+                </div>
+
+                <div class="card-footer">
+                    <div class="row">
+                    </div>
+                </div>
+            </div>
+        {%endfor%}
+    </div>
+{% endblock card_body %}
+
+{% block js %}
+     <script src="{% static 'sbadmin/js/action.js'%}"></script>
+{% endblock js %}

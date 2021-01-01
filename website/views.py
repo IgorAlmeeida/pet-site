@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import Post
 from adminpet.models import Project
+from django.core.paginator import Paginator
 
 # Create your views here.
 
@@ -11,9 +12,24 @@ def home(request):
     return render(request, 'website/index.html', data)
 
 def pageBlog(request):
-    posts = Post.objects.all()
+    search = request.GET.get("search")
+
+    posts_list = []
+
+    if (search):
+        posts_list = Post.objects.filter(title__icontains = search)
+    else: 
+        posts_list = Post.objects.all()
+
+    paginator = Paginator(list(posts_list), 1)
+
+    page = request.GET.get("page")
+
+    posts = paginator.get_page(page)
+
     data = {}
-    data['posts'] = posts
+    data['objects'] = posts
+    data['paginator'] = paginator
     data['projects'] = getProjects()
     
     return render(request, 'website/blog.html', data)

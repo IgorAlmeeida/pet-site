@@ -20,7 +20,7 @@
         </header>
 
         <div class="row">
-            {% for post in posts %}
+            {% for post in objects %}
             <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="100">
                 <div class="box">
                     <div class="row ">
@@ -41,7 +41,16 @@
                 
             </div> 
             {% endfor %}
-         </div>
+        </div>
+            <div>
+                {% if objects.has_previous %}
+                    <a href="?page={{ objects.previous_page_number }}" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">Mais Recentes</a>
+                {% endif %}
+
+                {% if objects.has_next %}
+                    <a href="?page={{ objects.next_page_number }}" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">Mais Antigos</a>
+                {% endif %}
+            </div>
 
     </div>
 </section><!-- End Services Section -->

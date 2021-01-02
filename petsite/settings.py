@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'adminpet',
     'website',
     'bootstrapform',
+    'ckeditor'
 ]
 
 MIDDLEWARE = [

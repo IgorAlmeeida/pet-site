@@ -29,7 +29,7 @@
                             <p>{{post.subTitle |slice:":60"}}</p>
                         </div>
                         <div class="col-12">
-                            <p class="description text-justify">{{ post.body|slice:":200" }}...</p>
+                            <p class="description text-justify">{{ post.body|slice:":200"|safe }}...</p>
                         </div>
                         <div class="col-12">
                             <a class="btn btn-primary position-relative" href="{% url 'post' idPost=post.id %}">Ler mais</a>
@@ -42,17 +42,17 @@
             </div> 
             {% endfor %}
         </div>
-            <div>
+            <div class="row">
                 {% if objects.has_previous %}
                     <a href="?page={{ objects.previous_page_number }}" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">Mais Recentes</a>
                 {% endif %}
 
                 {% if objects.has_next %}
-                    <a href="?page={{ objects.next_page_number }}" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">Mais Antigos</a>
+                    <a href="?page={{ objects.next_page_number }}" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link pull-right">Mais Antigos</a>
                 {% endif %}
             </div>
-
     </div>
+
 </section><!-- End Services Section -->
 
 {% endblock main %}

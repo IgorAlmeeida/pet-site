@@ -39,7 +39,7 @@
                     <div>
                         <h6 class="font-weight-bold text-primary text-center mb-3">{{post.subTitle}}</h6>
                         
-                        <p class="text-justify">{{post.body|slice:":600"}}</p>
+                        <p class="text-justify">{{post.body|safe|slice:":600"}}</p>
                     </div>
                     <div class="mt-4 float-right">
                         <a class="btn btn-primary" href="{% url 'detail_post' idPost=post.id %}">Detalhes</a>

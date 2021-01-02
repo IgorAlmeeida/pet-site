@@ -39,7 +39,7 @@
                 <div class="card-body">
                     <div>
                         <h6 class="mb-3 font-weight-bold text-primary">Introdução</h6>
-                        {{project.introduction}}
+                        {{project.introduction |safe}}
                     </div>
                     <div class="mt-4 float-right">
                         <a class="btn btn-primary" href="{% url 'list_activity' idProject=project.id %}">Atividades</a>

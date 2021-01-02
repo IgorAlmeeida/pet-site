@@ -138,3 +138,10 @@ LOGIN_REDIRECT_URL = '/adm/'
 LOGOUT_REDIRECT_URL = '/'
 
 LOGIN_URL = '/adm/login/'
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        'width': 'full',
+    },
+}

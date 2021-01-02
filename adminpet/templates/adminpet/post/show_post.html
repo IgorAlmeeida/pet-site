@@ -10,7 +10,7 @@
             <h6 class="m-0 font-weight-bold text-primary">{{post.subTitle}}</h6>
         </div>
         <div class="card-body">
-            {{post.body}}
+            {{post.body|safe}}
         </div>
     </div>
 {% endblock card_body %}

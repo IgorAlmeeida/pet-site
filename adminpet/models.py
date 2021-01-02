@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from ckeditor.fields import RichTextField 
 
 # Create your models here.
 
@@ -32,12 +33,12 @@ class Project(models.Model):
     )
     
     title = models.CharField(max_length=200, blank=False, null=False)
-    introduction = models.TextField(blank=False, null=False)
-    justification = models.TextField(blank=False, null=False)
-    objective =  models.TextField(blank=False, null=False)
-    methodology = models.TextField(blank=False, null=False)
+    introduction = RichTextField(blank=False, null=False)
+    justification = RichTextField(blank=False, null=False)
+    objective =  RichTextField(blank=False, null=False)
+    methodology = RichTextField(blank=False, null=False)
     creators = models.ManyToManyField(Profile)
-    reference = models.TextField(blank=False, null=False)
+    reference = RichTextField(blank=False, null=False)
     createDate = models.DateField(blank=False, null=False, auto_now=True)
     status = models.CharField(max_length=20, blank=False, null=False, choices=STATUS, default="Ativo")
 

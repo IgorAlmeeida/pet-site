@@ -71,9 +71,4 @@ urlpatterns = [
     path('reuniao/update/<int:idReunion>',updateReunion, name='update_reunion'),
     path('reuniao/delete/<int:idReunion>',deleteReunion, name='delete_reunion'),
     path('reuniao/list',listReunion, name='list_reunion'),
-
-
-
-
-
-]
+] 

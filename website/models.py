@@ -21,6 +21,7 @@ class Category(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=300, blank=False, null=False)
     subTitle = models.CharField(max_length=300, blank=False, null=False)
+    heardImg = models.ImageField(null=True, blank=True, upload_to="images/")
     dateCreate = models.DateTimeField(auto_now=True, blank=False, null=False)
     dateUpdated = models.DateTimeField(auto_now= True)
     body = RichTextField(blank=False, null=False)

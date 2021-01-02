@@ -64,6 +64,7 @@ class PostForm(ModelForm):
         fields = '__all__'
         labels = {
             'title' : ('Título'),
+            'heardImg':('Heard Imagem'),
             'subTitle': ('Sub Título'),
             'dateCreate' : ('Data de Criação'),
             'dateUpdated' : ('Ultima Atualização'),

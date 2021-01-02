@@ -4,7 +4,7 @@
 
 <div class="card shadow mb-4">
     <div class="card-body">
-        <form action="{% url 'delete_project' id=post.id%}" method="POST">
+        <form action="{% url 'delete_post' idPost=post.id %}" method="POST">
             {% csrf_token %}
             <p>Deseja deletar o post: {{post.title}}<p>
 

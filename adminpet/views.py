@@ -410,6 +410,8 @@ def deleteCategory(request, idCategory):
         data['category'] = category
         return render(request, 'adminpet/category/delete_category.html', data)
 
+#-------------------------------------------POST--------------------------------
+
 @login_required()
 def newPost(request):
     form = PostForm(request.POST or None)
@@ -487,11 +489,12 @@ def deletePost(request, idPost):
             return render(request, 'adminpet/post/delete_post.html', data)
         else:
             post.delete()
-            redirect('list_post')
+            return redirect('list_post')
     else:
         data['post'] = post
         return render(request, 'adminpet/post/delete_post.html', data)
 
+#---------------------------------------REUNION--------------------------------------
 
 @login_required()
 def createReunion(request):

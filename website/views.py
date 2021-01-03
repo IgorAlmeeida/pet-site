@@ -21,7 +21,7 @@ def pageBlog(request):
     else: 
         posts_list = Post.objects.all()
 
-    paginator = Paginator(list(posts_list), 1)
+    paginator = Paginator(list(posts_list), 9)
 
     page = request.GET.get("page")
 

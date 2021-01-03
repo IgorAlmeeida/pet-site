@@ -414,7 +414,7 @@ def deleteCategory(request, idCategory):
 
 @login_required()
 def newPost(request):
-    form = PostForm(request.POST or None)
+    form = PostForm(request.POST or None, request.FILES or None)
     
     if(request.method == 'POST'):
         if(form.is_valid()):
@@ -431,16 +431,16 @@ def newPost(request):
 def updatePost(request, idPost):
     data ={}
     post = Post.objects.get(id=idPost)
-    formPost = PostForm(request.POST or None, instance=post)
-
-    data['post'] = post
-    data['form_post'] = formPost 
 
     if (request.method == 'POST'):
+        formPost = PostForm(request.POST or None, request.FILES or None)
         if (formPost.is_valid()):
             formPost.save()
             return redirect('list_post')
     else:
+        formPost = PostForm(instance=post)
+        data['post'] = post
+        data['form_post'] = formPost 
         return render(request, 'adminpet/post/update_post.html', data)
 
 @login_required()

@@ -9,7 +9,7 @@ from .forms import (ProjectForm,
                     UserForm, 
                     ProfileForm, 
                     ReunionForm)
-from .models import Project, Cronogram, Activity, Profile, Reunion
+from .models import Project, Cronogram, Activity, Profile, Reunion, AuthorizedUser
 from website.models import Category, Post
 from django.conf import settings
 from django.contrib.auth import authenticate, logout
@@ -30,24 +30,30 @@ def register(request):
     if request.method == 'POST':
         user_form = UserForm(data=request.POST)
         profile_form = ProfileForm(data=request.POST)
-        if user_form.is_valid() and profile_form.is_valid():
-            user = user_form.save()
-            user.set_password(user.password)
-            user.save()
-            profile = profile_form.save(commit=False)
-            profile.user = user
-            profile.save()
-            registered = True
-        else:
-            print(user_form.errors,profile_form.errors)
+        if AuthorizedUser.objects.filter(cpf=request.POST['cpf']):
+            if user_form.is_valid() and profile_form.is_valid():
+                user = user_form.save()
+                user.set_password(user.password)
+                user.save()
+                profile = profile_form.save(commit=False)
+                profile.user = user
+                profile.save()
+                registered = True
+            else:
+                print(user_form.errors,profile_form.errors)
+        else: 
+            user_form = UserForm()
+            profile_form = ProfileForm()
+            registered = False
+
     else:
         user_form = UserForm()
         profile_form = ProfileForm()
     
-    return render(request,'adminpet/register.html',
-                          {'user_form':user_form,
-                           'profile_form':profile_form,
-                           'registered':registered})
+    data = {'user_form':user_form,
+            'profile_form':profile_form,
+            'registered':registered }
+    return render(request,'adminpet/register.html',data)
 
 def login(request):
     data = {}

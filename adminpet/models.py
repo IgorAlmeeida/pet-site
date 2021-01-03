@@ -20,7 +20,6 @@ class Profile(models.Model):
     cpf = models.CharField(max_length=11, blank=False, null=False)
     ancientDate = models.DateField(blank=False, null=False, auto_now=False)
     typeUser = models.CharField(max_length=20, blank=False, null=False, choices=TYPE_USER, default="Petiano")
-    active = models.BooleanField(blank=False, null=False, default=True)
 
     def __str__(self):
         return str(self.user.username)
@@ -75,4 +74,11 @@ class Reunion (models.Model):
     dateReunion = models.DateField(blank=False, null=False)
     typeReunion = models.CharField(max_length=20, choices=TYPE_REUNION, default='Ordinária', blank=False, null=False)
  
+
+class AuthorizedUser(models.Model):
+    cpf = models.CharField(max_length=11, blank=False, null=False)
+    completeName = models.CharField(max_length=150, blank=False, null=False)
+
+    def __str__(self):
+        return self.cpf + " - " + self.completeName 
     

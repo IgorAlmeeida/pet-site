@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'adminpet',
     'website',
     'bootstrapform',
-    'ckeditor'
+    'ckeditor',
+    'django_cleanup'
 ]
 
 MIDDLEWARE = [

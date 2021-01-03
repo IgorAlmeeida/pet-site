@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from os import remove as removeFile
 from django.http import HttpResponse
 from django.core.paginator import Paginator
 from .forms import (ProjectForm, 
@@ -439,7 +440,7 @@ def updatePost(request, idPost):
     post = Post.objects.get(id=idPost)
 
     if (request.method == 'POST'):
-        formPost = PostForm(request.POST or None, request.FILES or None)
+        formPost = PostForm(request.POST or None, request.FILES or None, instance=post)
         if (formPost.is_valid()):
             formPost.save()
             return redirect('list_post')

@@ -31,4 +31,9 @@ class Post(models.Model):
 
     def __str__(self):
         return str(self.title)
+    '''
+    def delete(self, using=None, keep_parents=False):
+        self.heardImg.storage.delete(self.heardImg.name)
+        super().delete()
+    '''
 

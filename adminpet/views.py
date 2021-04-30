@@ -378,16 +378,15 @@ def updateCategory(request, idCategory):
 def listCategory(request):
 
     search = request.GET.get("search")
-    project = Project.objects.get(id=idProject)
 
     category_list = []
 
     if (search):
-        category_list = Category.objects.filter(project_id=idProject,title__icontains = search)
+        category_list = Category.objects.filter(title__icontains = search)
     else: 
-        category_list = Category.objects.filter(project_id=idProject)
-
-    paginator = Paginator(list(category_list), 10)
+        category_list = Category.objects.all()
+    
+    paginator = Paginator(list(category_list),10)
 
     page = request.GET.get("page")
 
@@ -396,6 +395,7 @@ def listCategory(request):
     data = {}
     data['objects'] =  categorys
     data['paginator'] = paginator
+    print(data)
     return render(request, 'adminpet/category/list_category.html', data)
 
 @login_required()

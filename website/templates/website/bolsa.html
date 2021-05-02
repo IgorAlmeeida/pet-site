@@ -1,0 +1,70 @@
+{% extends "base_website.html" %}
+{% load static %}
+
+{% block title_pag %}
+    <ol>
+        <li><a href="{% url 'page_home_website' %}">Home</a></li>
+        <li>Bolsa FNDE</li>
+    </ol>
+{% endblock title_pag %}
+
+
+{% block main %}
+        <!-- ======= Team Section ======= -->
+    <section id="team" class="team section-bg">
+      <div class="container" data-aos="fade-up">
+        <div class="section-header">
+          <h3>Bolsa</h3>
+          <p>O Bolsa FNDE é um serviço oferecido pelo PET Criativação para os bolsistas do FNDE. 
+          Este serviço tem por objetivo alertar os bolsistas quando as bolsas estão disponíveis para saque.</p>
+        </div>
+
+        <div class="row">
+            <form class="col-12" id="formCadastrar">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" aria-describedby="email" placeholder="Email">
+            </div>
+            <div class="form-group">
+                <label for="cpf">CPF</label>
+                <input type="text" class="form-control" id="cpf" placeholder="CPF">
+            </div>
+            <button id="cadastrar" class="btn btn-primary">Cadastrar</button>
+            </form>
+        </div>
+
+      </div>
+    </section><!-- End Team Section -->
+
+{% endblock main %}
+
+{% block scripts %}
+    <script>
+        $("#cadastrar").click(function (e){
+            e.preventDefault();
+            let cpf = $("#cpf").val();
+            let email = $("#email").val();
+
+            $.ajax({
+                url: "{% url 'cadastrarPessoa' %}",
+                type: 'POST',
+                data:{
+                    cpf,
+                    email,
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                },
+                success: function (data) {
+                    alert(data.mensagem)
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown){
+                    alert("Não foi ṕossível realziar a requisição.");
+                    console.log(XMLHttpRequest.responseText);
+                }
+            });
+        });
+
+    </script>
+
+{% endblock scripts %}
+
+

@@ -2,6 +2,11 @@ from django.shortcuts import render
 from .models import Post
 from adminpet.models import Project
 from django.core.paginator import Paginator
+import requests
+import json
+from bolsa.models import Person
+from django.http import JsonResponse
+
 
 # Create your views here.
 
@@ -44,10 +49,10 @@ def pageSelections(request):
     data['projects'] = getProjects()
     return render(request, 'website/selecoes.html', data)
     
-def pageContatus(request):
+def pageBolsa(request):
     data = {}
     data['projects'] = getProjects()
-    return render(request, 'website/contato.html', data)
+    return render(request, 'website/bolsa.html', data)
 
 def pagePost(request, idPost):
     post = Post.objects.get(id=idPost)
@@ -68,3 +73,29 @@ def pageProject(request, idProject):
 
 def getProjects():
     return Project.objects.all()
+
+def cadastrarPessoa(request):
+    cpf = request.POST.get('cpf', None)  
+    email = request.POST.get('email', None)
+
+    try:
+        if (cpf != None and cpf != '' and email != None and email != ''):
+            dadosPessoa = requests.get("https://www.fnde.gov.br/digef/rs/spba/publica/pessoa/1/10/"+cpf)
+            
+            if (dadosPessoa.status_code != 200):
+                raise Exception("Banco de dados do FNDE indisponível, por favor tente mais tarde!")
+            
+            try:
+                dadosPessoa = json.loads(dadosPessoa.content)
+                person = Person(name=dadosPessoa['pessoas'][0]['nome'], cpf=cpf, email=email, hash_fnde=dadosPessoa['pessoas'][0]['hash'])
+                person.save()
+            except Exception as e:
+                raise Exception("Email ou CPF já cadastrados.")
+            
+            return JsonResponse({'status':'200', 'mensagem': 'Cadastro realizdo com sucesso.'})
+        else: 
+            raise Exception("Por favor, insira todos os dados.") 
+    except Exception as e:
+        return JsonResponse({'status':'400', 'mensagem': str(e)})
+
+

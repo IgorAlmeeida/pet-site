@@ -547,10 +547,10 @@ def listReunion(request):
 
     page = request.GET.get("page")
 
-    posts = paginator.get_page(page)
+    reunion = paginator.get_page(page)
 
     data = {}
-    data['objects'] = posts
+    data['objects'] = reunion
     data['paginator'] = paginator
     return render(request, 'adminpet/reunion/list_reunion.html', data)
 

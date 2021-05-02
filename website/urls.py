@@ -4,9 +4,10 @@ from .views import (home,
                     pageBlog,
                     pageMembers,
                     pageSelections,
-                    pageContatus,
+                    pageBolsa,
                     pagePost,
-                    pageProject)
+                    pageProject,
+                    cadastrarPessoa)
                                         
 urlpatterns = [
     path('', home, name='page_home_website'),
@@ -14,6 +15,7 @@ urlpatterns = [
     path('membros/', pageMembers, name='membros'),
     path('projeto/<int:idProject>', pageProject, name='projects'),
     path('selecoes/', pageSelections, name='selecoes'),
-    path('contato/', pageContatus, name='contato'),
+    path('bolsa/', pageBolsa, name='bolsa'),
     path('post/<int:idPost>', pagePost, name='post'),
+    path('cadastarPessoa/', cadastrarPessoa, name='cadastrarPessoa'),
 ]
